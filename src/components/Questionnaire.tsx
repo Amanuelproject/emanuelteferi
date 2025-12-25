@@ -250,10 +250,10 @@ const Questionnaire = () => {
 
     try {
       await emailjs.send(
-        "service_emanuel", // Service ID - you'll create this
-        "template_project_inquiry", // Template ID - you'll create this
+        "service_8ngxori",
+        "template_vmjrvsk",
         templateParams,
-        "YOUR_PUBLIC_KEY" // Public Key - you'll get this from EmailJS
+        "SKsjoulP05DEai9Y"
       );
 
       setIsSubmitted(true);
