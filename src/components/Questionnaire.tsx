@@ -261,11 +261,20 @@ const Questionnaire = () => {
         title: "Project details sent successfully!",
         description: "Emanuel will contact you shortly.",
       });
-    } catch (error) {
-      console.error("EmailJS Error:", error);
+    } catch (error: unknown) {
+      const err = error as any;
+      const status = err?.status ?? err?.response?.status;
+      const text = err?.text ?? err?.message ?? String(err);
+      const origin = typeof window !== "undefined" ? window.location.origin : "unknown";
+
+      // Don't log user form details (PII); only log EmailJS failure metadata.
+      console.error("EmailJS Error:", { status, text, origin });
+
       toast({
         title: "Something went wrong",
-        description: "Please try again or contact directly via WhatsApp.",
+        description: import.meta.env.DEV
+          ? `Email sending failed (${status ?? "no-status"}): ${text}`
+          : "Please try again or contact directly via WhatsApp.",
         variant: "destructive",
       });
     } finally {
