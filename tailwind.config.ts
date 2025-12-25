@@ -55,6 +55,9 @@ export default {
           primary: "hsl(var(--glow-primary))",
           secondary: "hsl(var(--glow-secondary))",
         },
+        "neon-cyan": "hsl(var(--neon-cyan))",
+        "neon-purple": "hsl(var(--neon-purple))",
+        "neon-green": "hsl(142 76% 50%)",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

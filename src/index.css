@@ -46,6 +46,10 @@
     --gradient-start: 190 95% 50%;
     --gradient-end: 260 80% 60%;
     
+    /* Neon colors */
+    --neon-cyan: 190 95% 50%;
+    --neon-purple: 260 80% 60%;
+    
     /* Sidebar */
     --sidebar-background: 222 47% 6%;
     --sidebar-foreground: 210 40% 96%;
