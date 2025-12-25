@@ -1,0 +1,176 @@
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, Globe } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import logo from '@/assets/logo.png';
+
+const navLinks = [
+  { href: '#home', label: 'Home' },
+  { href: '#about', label: 'About' },
+  { href: '#services', label: 'Services' },
+  { href: '#portfolio', label: 'Portfolio' },
+  { href: '#contact', label: 'Contact' },
+];
+
+const languages = [
+  { code: 'en', label: 'English' },
+  { code: 'am', label: 'አማርኛ' },
+  { code: 'or', label: 'Afaan Oromo' },
+];
+
+export function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [currentLang, setCurrentLang] = useState('en');
+  const [showLangDropdown, setShowLangDropdown] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleNavClick = (href: string) => {
+    setIsMobileMenuOpen(false);
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <>
+      <motion.nav
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+          isScrolled ? 'glass border-b border-border/50' : 'bg-transparent'
+        }`}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-16 md:h-20">
+            {/* Logo */}
+            <a href="#home" className="flex items-center gap-3">
+              <img src={logo} alt="Emanuel Teferi" className="w-10 h-10 object-contain" />
+              <span className="font-semibold text-foreground hidden sm:block">
+                Emanuel<span className="text-primary">.</span>
+              </span>
+            </a>
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-8">
+              {navLinks.map((link) => (
+                <button
+                  key={link.href}
+                  onClick={() => handleNavClick(link.href)}
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300 relative group"
+                >
+                  {link.label}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+                </button>
+              ))}
+            </div>
+
+            {/* Right side */}
+            <div className="flex items-center gap-4">
+              {/* Language Switcher */}
+              <div className="relative">
+                <button
+                  onClick={() => setShowLangDropdown(!showLangDropdown)}
+                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <Globe className="w-4 h-4" />
+                  <span className="hidden sm:block">{languages.find(l => l.code === currentLang)?.label}</span>
+                </button>
+                
+                <AnimatePresence>
+                  {showLangDropdown && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      className="absolute right-0 top-full mt-2 bg-card border border-border rounded-lg shadow-lg overflow-hidden min-w-[140px]"
+                    >
+                      {languages.map((lang) => (
+                        <button
+                          key={lang.code}
+                          onClick={() => {
+                            setCurrentLang(lang.code);
+                            setShowLangDropdown(false);
+                          }}
+                          className={`w-full px-4 py-2 text-left text-sm hover:bg-secondary transition-colors ${
+                            currentLang === lang.code ? 'text-primary' : 'text-foreground'
+                          }`}
+                        >
+                          {lang.label}
+                        </button>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* CTA Button */}
+              <Button
+                variant="hero"
+                size="sm"
+                onClick={() => handleNavClick('#contact')}
+                className="hidden sm:flex"
+              >
+                Let's Talk
+              </Button>
+
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="md:hidden p-2 text-foreground"
+              >
+                {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
+          </div>
+        </div>
+      </motion.nav>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'tween', duration: 0.3 }}
+            className="fixed inset-0 z-30 bg-background/98 backdrop-blur-lg md:hidden pt-20"
+          >
+            <div className="flex flex-col items-center justify-center h-full gap-8">
+              {navLinks.map((link, index) => (
+                <motion.button
+                  key={link.href}
+                  onClick={() => handleNavClick(link.href)}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="text-2xl font-medium text-foreground hover:text-primary transition-colors"
+                >
+                  {link.label}
+                </motion.button>
+              ))}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+              >
+                <Button variant="hero" size="lg" onClick={() => handleNavClick('#contact')}>
+                  Let's Talk
+                </Button>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
