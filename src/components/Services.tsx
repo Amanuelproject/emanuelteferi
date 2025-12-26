@@ -75,7 +75,7 @@ export function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative p-6 rounded-2xl bg-card/50 border border-border/50 hover:border-primary/30 transition-all duration-500"
+              className="group relative p-6 rounded-2xl bg-card/50 border border-primary/20 hover:border-primary/50 transition-all duration-500"
             >
               {/* Glow effect on hover */}
               <div className="absolute inset-0 rounded-2xl bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

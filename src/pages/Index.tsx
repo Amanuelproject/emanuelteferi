@@ -9,6 +9,7 @@ import { Portfolio } from '@/components/Portfolio';
 import { Contact } from '@/components/Contact';
 import { Footer } from '@/components/Footer';
 import { SectionCTA } from '@/components/SectionCTA';
+import { SectionDivider } from '@/components/SectionDivider';
 import { Gallery } from '@/components/Gallery';
 
 const Index = () => {
@@ -42,16 +43,22 @@ const Index = () => {
         <Navbar />
         <main>
           <Hero />
+          <SectionDivider />
           <SectionCTA />
           <About />
+          <SectionDivider flip />
           <SectionCTA />
           <Testimonials />
+          <SectionDivider />
           <SectionCTA />
           <Services />
+          <SectionDivider flip />
           <SectionCTA />
           <Portfolio />
+          <SectionDivider />
           <SectionCTA />
           <Contact />
+          <SectionDivider flip />
           <Gallery />
         </main>
         <Footer />
