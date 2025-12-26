@@ -19,27 +19,28 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
   const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
-    // Animate code lines
+    // Animate code lines - smoother timing for 8 second duration
+    const lineDelay = 600; // Slower, smoother line reveals
     const lineInterval = setInterval(() => {
       setCurrentLine((prev) => {
         if (prev >= codeLines.length - 1) {
           clearInterval(lineInterval);
-          setTimeout(() => setShowLogo(true), 300);
+          setTimeout(() => setShowLogo(true), 500);
           return prev;
         }
         return prev + 1;
       });
-    }, 400);
+    }, lineDelay);
 
-    // Start fade out after animations
+    // Start fade out after animations - smooth 8 second experience
     const fadeTimer = setTimeout(() => {
       setFadeOut(true);
-    }, 8000);
+    }, 7500);
 
-    // Complete after fade
+    // Complete after smooth fade
     const completeTimer = setTimeout(() => {
       onComplete();
-    }, 9000);
+    }, 8500);
 
     return () => {
       clearInterval(lineInterval);
@@ -55,28 +56,28 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
           className="fixed inset-0 z-50 flex items-center justify-center bg-background overflow-hidden"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: 'easeInOut' }}
+          transition={{ duration: 1, ease: [0.4, 0, 0.2, 1] }}
         >
           {/* Animated background particles */}
           <div className="absolute inset-0 overflow-hidden">
             {[...Array(20)].map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute w-1 h-1 rounded-full bg-primary/30"
+                className="absolute w-0.5 h-0.5 rounded-full bg-primary/20"
                 initial={{
-                  x: Math.random() * window.innerWidth,
-                  y: -20,
+                  x: `${Math.random() * 100}%`,
+                  y: -10,
                   opacity: 0,
                 }}
                 animate={{
-                  y: window.innerHeight + 20,
-                  opacity: [0, 1, 1, 0],
+                  y: '110vh',
+                  opacity: [0, 0.6, 0.6, 0],
                 }}
                 transition={{
-                  duration: 3 + Math.random() * 2,
+                  duration: 5 + Math.random() * 3,
                   repeat: Infinity,
-                  delay: Math.random() * 2,
-                  ease: 'linear',
+                  delay: Math.random() * 3,
+                  ease: [0.4, 0, 0.6, 1],
                 }}
               />
             ))}
@@ -116,7 +117,7 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
                     key={index}
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
                     className="flex"
                   >
                     <span className="text-muted-foreground w-6 select-none">{index + 1}</span>
@@ -180,9 +181,9 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
               {showLogo && (
                 <motion.div
                   className="flex flex-col items-center gap-4"
-                  initial={{ opacity: 0, scale: 0.8 }}
+                  initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, ease: 'easeOut' }}
+                  transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
                 >
                   <motion.img
                     src={logo}
