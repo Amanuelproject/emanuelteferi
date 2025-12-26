@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Github } from 'lucide-react';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { motion, AnimatePresence, PanInfo } from 'framer-motion';
+import { ExternalLink, Github, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -149,6 +149,7 @@ interface PortfolioImageSliderProps {
 function PortfolioImageSlider({ images, projectName, website, isInView }: PortfolioImageSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [direction, setDirection] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // Preload all images when component mounts
@@ -179,11 +180,21 @@ function PortfolioImageSlider({ images, projectName, website, isInView }: Portfo
     });
   }, [images]);
 
+  const goToNext = useCallback(() => {
+    setDirection(1);
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  }, [images.length]);
+
+  const goToPrev = useCallback(() => {
+    setDirection(-1);
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  }, [images.length]);
+
   useEffect(() => {
     // Only start sliding if in view, has multiple images, and images are preloaded
     if (isInView && images.length > 1 && imagesLoaded) {
       intervalRef.current = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 1) % images.length);
+        goToNext();
       }, 3000); // 3 seconds between transitions
     }
 
@@ -192,7 +203,7 @@ function PortfolioImageSlider({ images, projectName, website, isInView }: Portfo
         clearInterval(intervalRef.current);
       }
     };
-  }, [isInView, images.length, imagesLoaded]);
+  }, [isInView, images.length, imagesLoaded, goToNext]);
 
   // Reset to first image when not in view
   useEffect(() => {
@@ -201,49 +212,107 @@ function PortfolioImageSlider({ images, projectName, website, isInView }: Portfo
     }
   }, [isInView]);
 
+  // Handle swipe gestures
+  const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+    const swipeThreshold = 50;
+    if (info.offset.x < -swipeThreshold) {
+      goToNext();
+    } else if (info.offset.x > swipeThreshold) {
+      goToPrev();
+    }
+  };
+
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 100 : -100,
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction: number) => ({
+      x: direction < 0 ? 100 : -100,
+      opacity: 0,
+    }),
+  };
+
   return (
-    <a 
-      href={website} 
-      target="_blank" 
-      rel="noopener noreferrer"
-      className="block border-t border-border/50 overflow-hidden"
-    >
-      <div className="relative group/image h-48 overflow-hidden">
-        <AnimatePresence mode="wait">
-          <motion.img
+    <div className="block border-t border-border/50 overflow-hidden">
+      <div className="relative group/image h-48 overflow-hidden touch-pan-y">
+        <AnimatePresence initial={false} custom={direction} mode="wait">
+          <motion.a
             key={currentIndex}
-            src={images[currentIndex]}
-            alt={`${projectName} website screenshot`}
-            loading="lazy"
-            decoding="async"
-            className="absolute inset-0 w-full h-full object-cover object-top"
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.7, ease: 'easeInOut' }}
-          />
+            href={website}
+            target="_blank"
+            rel="noopener noreferrer"
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.4, ease: 'easeInOut' }}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.2}
+            onDragEnd={handleDragEnd}
+            className="absolute inset-0 cursor-grab active:cursor-grabbing"
+          >
+            <img
+              src={images[currentIndex]}
+              alt={`${projectName} website screenshot`}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover object-top"
+            />
+          </motion.a>
         </AnimatePresence>
-        <div className="absolute inset-0 bg-primary/0 group-hover/image:bg-primary/10 transition-colors duration-300 flex items-center justify-center z-10">
+        
+        <div className="absolute inset-0 bg-primary/0 group-hover/image:bg-primary/10 transition-colors duration-300 flex items-center justify-center z-10 pointer-events-none">
           <span className="opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 bg-background/90 px-4 py-2 rounded-lg text-sm font-medium text-foreground">
             View Live Site
           </span>
         </div>
         
+        {/* Swipe indicators for mobile */}
+        {images.length > 1 && (
+          <>
+            {/* Left arrow indicator */}
+            <button
+              onClick={(e) => { e.preventDefault(); goToPrev(); }}
+              className="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-background/80 p-1.5 rounded-full opacity-0 group-hover/image:opacity-100 md:opacity-100 transition-opacity duration-300"
+              aria-label="Previous image"
+            >
+              <ChevronLeft className="w-4 h-4 text-foreground" />
+            </button>
+            {/* Right arrow indicator */}
+            <button
+              onClick={(e) => { e.preventDefault(); goToNext(); }}
+              className="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-background/80 p-1.5 rounded-full opacity-0 group-hover/image:opacity-100 md:opacity-100 transition-opacity duration-300"
+              aria-label="Next image"
+            >
+              <ChevronRight className="w-4 h-4 text-foreground" />
+            </button>
+          </>
+        )}
+        
         {/* Slide indicators */}
         {images.length > 1 && (
           <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
             {images.map((_, idx) => (
-              <div
+              <button
                 key={idx}
+                onClick={(e) => { e.preventDefault(); setDirection(idx > currentIndex ? 1 : -1); setCurrentIndex(idx); }}
                 className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                  idx === currentIndex ? 'bg-primary w-4' : 'bg-foreground/30'
+                  idx === currentIndex ? 'bg-primary w-4' : 'bg-foreground/30 hover:bg-foreground/50'
                 }`}
+                aria-label={`Go to image ${idx + 1}`}
               />
             ))}
           </div>
         )}
       </div>
-    </a>
+    </div>
   );
 }
 

@@ -80,8 +80,8 @@ export function Navbar() {
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
             <a href="#home" className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/40 bg-card">
-                <img src={logo} alt="Emanuel Teferi" className="w-full h-full object-cover" />
+              <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/40 bg-card flex items-center justify-center">
+                <img src={logo} alt="Emanuel Teferi" className="w-[130%] h-[130%] object-cover" />
               </div>
               <span className="font-semibold text-foreground hidden sm:block">
                 Emanuel<span className="text-primary">.</span>
