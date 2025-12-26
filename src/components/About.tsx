@@ -66,21 +66,29 @@ export function About() {
 
             <div className="space-y-4 text-muted-foreground">
               <p>
-                I first touched code at ten — not because anyone pushed me to, but because 
-                I wanted to understand how things worked. That curiosity stayed with me 
-                through school, through everything. Now at 18, I build websites for 
-                Ethiopian businesses ready to be seen.
+                My name is Emmanuel Tafari, an Ethiopian-based web developer who started 
+                learning to code around the age of 10 — mostly out of curiosity and a love 
+                for figuring out how things work. For years, I balanced that curiosity with 
+                school, focusing heavily on academics and doing pretty well along the way.
               </p>
               <p>
-                At some point, I had to decide what really mattered. I chose this path — 
-                creating solutions that help people grow. In Addis Ababa, a professional 
-                website isn't a luxury anymore. It's how trust begins before the first 
-                conversation even happens.
+                Then Grade 12 happened. Like many Ethiopian students, things didn't go as 
+                planned — and honestly, that moment became a wake-up call. I leaned fully 
+                into the skill I had quietly been building for years and decided to take 
+                it seriously.
               </p>
               <p>
-                My approach is straightforward: listen carefully, build precisely, deliver 
-                reliably. No unnecessary complexity, no features you won't use. Every project 
-                is part of something I'm building — a foundation, one client at a time.
+                Today, I help cafés, salons, clinics, and local businesses in Addis Ababa 
+                show up online with modern, practical websites that actually solve real 
+                problems — from visibility to bookings and orders. I keep things simple: 
+                understand the business, build what's needed, and deliver something owners 
+                are proud to share.
+              </p>
+              <p>
+                Beyond client work, I'm an entrepreneur at heart. Web development is not 
+                just what I do — it's the foundation I'm using to build bigger ideas and 
+                contribute, in my own way, to how Ethiopia is represented to the world 
+                through technology.
               </p>
             </div>
 
