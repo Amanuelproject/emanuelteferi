@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Github } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -12,6 +13,94 @@ import blingDentalImg from '@/assets/portfolio/bling-dental.png';
 import rainbowDecorImg from '@/assets/portfolio/rainbow-decor.png';
 import blackPotionImg from '@/assets/portfolio/black-potion.png';
 import momensSalonImg from '@/assets/portfolio/momens-salon.png';
+import momensSalonImg2 from '@/assets/portfolio/momens-salon-2.png';
+import momensSalonImg3 from '@/assets/portfolio/momens-salon-3.png';
+import momensSalonImg4 from '@/assets/portfolio/momens-salon-4.png';
+import momensSalonImg5 from '@/assets/portfolio/momens-salon-5.png';
+
+// Slideshow component for portfolio images
+function PortfolioSlideshow({ images, projectName, website }: { images: string[]; projectName: string; website?: string }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [hasBeenViewed, setHasBeenViewed] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Start slideshow only after user has viewed the first image
+  useEffect(() => {
+    if (!hasBeenViewed || images.length <= 1) return;
+
+    const interval = setInterval(() => {
+      setCurrentIndex(prev => (prev + 1) % images.length);
+    }, 3500);
+
+    return () => clearInterval(interval);
+  }, [hasBeenViewed, images.length]);
+
+  // Use IntersectionObserver to detect when user sees the image
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          // Delay starting the slideshow to let user see first image
+          setTimeout(() => {
+            setHasBeenViewed(true);
+          }, 2000);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const content = (
+    <div ref={containerRef} className="relative group/image overflow-hidden">
+      <AnimatePresence mode="wait">
+        <motion.img
+          key={currentIndex}
+          src={images[currentIndex]}
+          alt={`${projectName} screenshot ${currentIndex + 1}`}
+          className="w-full h-48 object-cover object-top"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+        />
+      </AnimatePresence>
+      <div className="absolute inset-0 bg-primary/0 group-hover/image:bg-primary/10 transition-colors duration-300 flex items-center justify-center">
+        <span className="opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 bg-background/90 px-4 py-2 rounded-lg text-sm font-medium text-foreground">
+          View Live Site
+        </span>
+      </div>
+      {/* Slideshow indicators */}
+      {images.length > 1 && (
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5">
+          {images.map((_, idx) => (
+            <span
+              key={idx}
+              className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                idx === currentIndex ? 'bg-primary' : 'bg-foreground/30'
+              }`}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+
+  if (website) {
+    return (
+      <a href={website} target="_blank" rel="noopener noreferrer" className="block border-t border-border/50 overflow-hidden">
+        {content}
+      </a>
+    );
+  }
+
+  return <div className="border-t border-border/50 overflow-hidden">{content}</div>;
+}
 
 const projects = [
   {
@@ -23,7 +112,7 @@ const projects = [
     outcome: 'Increase in quality walk-ins and WhatsApp inquiries; customers trust clear pricing',
     website: 'https://momenssalon.lovable.app/#',
     github: 'https://github.com/webniereagency/momenssalon-39538efe',
-    image: momensSalonImg,
+    images: [momensSalonImg, momensSalonImg2, momensSalonImg3, momensSalonImg4, momensSalonImg5],
   },
   {
     name: 'Cherchis Café',
@@ -34,7 +123,7 @@ const projects = [
     outcome: 'More weekday visitors; customers now find them via Google search',
     website: 'https://cherchiscafe1.lovable.app/',
     github: 'https://github.com/webniereagency/cherchiscafe1-d8b4ec2c',
-    image: cherchisCafeImg,
+    images: [cherchisCafeImg],
   },
   {
     name: "Nuha's Garden",
@@ -45,7 +134,7 @@ const projects = [
     outcome: 'More tour bookings, better-prepared inquiries from planners',
     website: 'https://nuhasgarden.lovable.app/',
     github: 'https://github.com/webniereagency/nuhasgarden',
-    image: nuhasGardenImg,
+    images: [nuhasGardenImg],
   },
   {
     name: 'Solina Coffee',
@@ -56,7 +145,7 @@ const projects = [
     outcome: 'Customers decide drinks before coming; fewer calls asking basic questions',
     website: 'https://solinacoffe.lovable.app/',
     github: 'https://github.com/webniereagency/solinacoffe',
-    image: solinaCoffeeImg,
+    images: [solinaCoffeeImg],
   },
   {
     name: 'Dusk Addis',
@@ -67,7 +156,7 @@ const projects = [
     outcome: 'More table reservations, fewer repeated inquiries',
     website: 'https://duskaddis.lovable.app/',
     github: 'https://github.com/webniereagency/duskaddis',
-    image: duskAddisImg,
+    images: [duskAddisImg],
   },
   {
     name: 'Bling Dental Clinic',
@@ -78,7 +167,7 @@ const projects = [
     outcome: 'Patients book online directly; clinic feels more professional',
     website: 'https://blingdental.lovable.app/',
     github: 'https://github.com/webniereagency/blingdental',
-    image: blingDentalImg,
+    images: [blingDentalImg],
   },
   {
     name: 'Rainbow Decor Ethiopia',
@@ -89,7 +178,7 @@ const projects = [
     outcome: 'Faster client decisions, streamlined quotes',
     website: 'https://rainbow-decor-ethiopia.lovable.app/#home',
     github: 'https://github.com/webniereagency/webniereagencyspreload1',
-    image: rainbowDecorImg,
+    images: [rainbowDecorImg],
   },
   {
     name: 'Black Potion Sedona',
@@ -100,7 +189,7 @@ const projects = [
     outcome: 'International project showcasing versatility',
     website: 'https://blackpotionsedona.github.io/new/#/',
     github: null,
-    image: blackPotionImg,
+    images: [blackPotionImg],
   },
 ];
 
@@ -240,27 +329,13 @@ export function Portfolio() {
                 </div>
               </div>
 
-              {/* Portfolio Image - Below the card content */}
-              {project.image && project.website && (
-                <a 
-                  href={project.website} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block border-t border-border/50 overflow-hidden"
-                >
-                  <div className="relative group/image">
-                    <img 
-                      src={project.image} 
-                      alt={`${project.name} website screenshot`}
-                      className="w-full h-48 object-cover object-top transition-transform duration-500 group-hover/image:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-primary/0 group-hover/image:bg-primary/10 transition-colors duration-300 flex items-center justify-center">
-                      <span className="opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 bg-background/90 px-4 py-2 rounded-lg text-sm font-medium text-foreground">
-                        {t('portfolio.viewLiveSite')}
-                      </span>
-                    </div>
-                  </div>
-                </a>
+              {/* Portfolio Image Slideshow - Below the card content */}
+              {project.images && project.images.length > 0 && (
+                <PortfolioSlideshow 
+                  images={project.images} 
+                  projectName={project.name}
+                  website={project.website}
+                />
               )}
 
               {/* Hover glow */}
