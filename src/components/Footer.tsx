@@ -1,14 +1,7 @@
 import { motion } from 'framer-motion';
-import { Facebook, Instagram, Github, Linkedin, Heart } from 'lucide-react';
+import { Heart } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import logo from '@/assets/logo.png';
-
-const socialLinks = [
-  { icon: Github, href: 'https://github.com/webniereagency', label: 'GitHub' },
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
-  { icon: Instagram, href: '#', label: 'Instagram' },
-  { icon: Facebook, href: '#', label: 'Facebook' },
-];
 
 export function Footer() {
   const { t } = useLanguage();
@@ -34,7 +27,7 @@ export function Footer() {
       <div className="absolute inset-0 bg-gradient-to-t from-card/50 to-background" />
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
           {/* Brand */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -74,36 +67,6 @@ export function Footer() {
               ))}
             </ul>
           </motion.div>
-
-          {/* Contact */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <h3 className="font-semibold text-foreground mb-4">{t('footer.getInTouch')}</h3>
-            <div className="space-y-2 text-sm text-muted-foreground">
-              <p>Addis Ababa, Ethiopia</p>
-              <p>+251 962 025 394</p>
-            </div>
-
-            {/* Social links */}
-            <div className="flex gap-3 mt-6">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-all"
-                  aria-label={social.label}
-                >
-                  <social.icon className="w-5 h-5" />
-                </a>
-              ))}
-            </div>
-          </motion.div>
         </div>
 
         {/* Bottom bar */}
@@ -113,7 +76,7 @@ export function Footer() {
               © {new Date().getFullYear()} Emanuel Teferi. {t('footer.allRightsReserved')}
             </p>
             <p className="text-sm text-muted-foreground flex items-center gap-1">
-              {t('footer.madeWith')} <Heart className="w-4 h-4 text-primary" /> {t('footer.inAddis')}
+              Crafted with <Heart className="w-4 h-4 text-primary animate-pulse" /> in Addis Ababa
             </p>
           </div>
         </div>
