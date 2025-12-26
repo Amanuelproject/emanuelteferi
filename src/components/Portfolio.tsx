@@ -2,6 +2,15 @@ import { motion } from 'framer-motion';
 import { ExternalLink, Github } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
+// Import portfolio images
+import cherchisCafeImg from '@/assets/portfolio/cherchis-cafe.png';
+import nuhasGardenImg from '@/assets/portfolio/nuhas-garden.png';
+import solinaCoffeeImg from '@/assets/portfolio/solina-coffee.png';
+import duskAddisImg from '@/assets/portfolio/dusk-addis.png';
+import blingDentalImg from '@/assets/portfolio/bling-dental.png';
+import rainbowDecorImg from '@/assets/portfolio/rainbow-decor.png';
+import blackPotionImg from '@/assets/portfolio/black-potion.png';
+
 const projects = [
   {
     name: "Mo Men's Salon & Spa",
@@ -12,6 +21,7 @@ const projects = [
     outcome: 'Increase in quality walk-ins and WhatsApp inquiries; customers trust clear pricing',
     website: null,
     github: null,
+    image: null,
   },
   {
     name: 'Cherchis Café',
@@ -22,6 +32,7 @@ const projects = [
     outcome: 'More weekday visitors; customers now find them via Google search',
     website: 'https://cherchiscafe1.lovable.app/',
     github: 'https://github.com/webniereagency/cherchiscafe1-d8b4ec2c',
+    image: cherchisCafeImg,
   },
   {
     name: "Nuha's Garden",
@@ -32,6 +43,7 @@ const projects = [
     outcome: 'More tour bookings, better-prepared inquiries from planners',
     website: 'https://nuhasgarden.lovable.app/',
     github: 'https://github.com/webniereagency/nuhasgarden',
+    image: nuhasGardenImg,
   },
   {
     name: 'Solina Coffee',
@@ -42,6 +54,7 @@ const projects = [
     outcome: 'Customers decide drinks before coming; fewer calls asking basic questions',
     website: 'https://solinacoffe.lovable.app/',
     github: 'https://github.com/webniereagency/solinacoffe',
+    image: solinaCoffeeImg,
   },
   {
     name: 'Dusk Addis',
@@ -52,6 +65,7 @@ const projects = [
     outcome: 'More table reservations, fewer repeated inquiries',
     website: 'https://duskaddis.lovable.app/',
     github: 'https://github.com/webniereagency/duskaddis',
+    image: duskAddisImg,
   },
   {
     name: 'Bling Dental Clinic',
@@ -62,6 +76,7 @@ const projects = [
     outcome: 'Patients book online directly; clinic feels more professional',
     website: 'https://blingdental.lovable.app/',
     github: 'https://github.com/webniereagency/blingdental',
+    image: blingDentalImg,
   },
   {
     name: 'Rainbow Decor Ethiopia',
@@ -72,6 +87,7 @@ const projects = [
     outcome: 'Faster client decisions, streamlined quotes',
     website: 'https://rainbow-decor-ethiopia.lovable.app/#home',
     github: 'https://github.com/webniereagency/webniereagencyspreload1',
+    image: rainbowDecorImg,
   },
   {
     name: 'Black Potion Sedona',
@@ -82,6 +98,7 @@ const projects = [
     outcome: 'International project showcasing versatility',
     website: 'https://blackpotionsedona.github.io/new/#/',
     github: null,
+    image: blackPotionImg,
   },
 ];
 
@@ -194,6 +211,29 @@ export function Portfolio() {
                   )}
                 </div>
               </div>
+
+              {/* Portfolio Image - Below the card content */}
+              {project.image && project.website && (
+                <a 
+                  href={project.website} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="block border-t border-border/50 overflow-hidden"
+                >
+                  <div className="relative group/image">
+                    <img 
+                      src={project.image} 
+                      alt={`${project.name} website screenshot`}
+                      className="w-full h-48 object-cover object-top transition-transform duration-500 group-hover/image:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-primary/0 group-hover/image:bg-primary/10 transition-colors duration-300 flex items-center justify-center">
+                      <span className="opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 bg-background/90 px-4 py-2 rounded-lg text-sm font-medium text-foreground">
+                        View Live Site
+                      </span>
+                    </div>
+                  </div>
+                </a>
+              )}
 
               {/* Hover glow */}
               <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
