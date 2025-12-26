@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from '@/assets/logo.png';
 
@@ -14,40 +14,129 @@ const codeLines = [
 ];
 
 export function Preloader({ onComplete }: { onComplete: () => void }) {
-  const [currentLine, setCurrentLine] = useState(0);
+  const [visibleLines, setVisibleLines] = useState<string[]>([]);
+  const [currentLineIndex, setCurrentLineIndex] = useState(0);
+  const [currentCharIndex, setCurrentCharIndex] = useState(0);
   const [showLogo, setShowLogo] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
+  const typingComplete = useRef(false);
 
+  // Typewriter effect - character by character
   useEffect(() => {
-    // Animate code lines - smoother timing for 8 second duration
-    const lineDelay = 600; // Slower, smoother line reveals
-    const lineInterval = setInterval(() => {
-      setCurrentLine((prev) => {
-        if (prev >= codeLines.length - 1) {
-          clearInterval(lineInterval);
-          setTimeout(() => setShowLogo(true), 500);
-          return prev;
-        }
-        return prev + 1;
-      });
-    }, lineDelay);
+    if (typingComplete.current) return;
 
-    // Start fade out after animations - smooth 8 second experience
+    if (currentLineIndex >= codeLines.length) {
+      typingComplete.current = true;
+      setTimeout(() => setShowLogo(true), 400);
+      return;
+    }
+
+    const currentLine = codeLines[currentLineIndex];
+    
+    if (currentCharIndex <= currentLine.length) {
+      const timeout = setTimeout(() => {
+        setVisibleLines(prev => {
+          const newLines = [...prev];
+          newLines[currentLineIndex] = currentLine.slice(0, currentCharIndex);
+          return newLines;
+        });
+        setCurrentCharIndex(prev => prev + 1);
+      }, 35); // Smooth typing speed
+      return () => clearTimeout(timeout);
+    } else {
+      // Move to next line
+      const timeout = setTimeout(() => {
+        setCurrentLineIndex(prev => prev + 1);
+        setCurrentCharIndex(0);
+      }, 150); // Pause between lines
+      return () => clearTimeout(timeout);
+    }
+  }, [currentLineIndex, currentCharIndex]);
+
+  // Fade out and complete
+  useEffect(() => {
     const fadeTimer = setTimeout(() => {
       setFadeOut(true);
     }, 7500);
 
-    // Complete after smooth fade
     const completeTimer = setTimeout(() => {
       onComplete();
     }, 8500);
 
     return () => {
-      clearInterval(lineInterval);
       clearTimeout(fadeTimer);
       clearTimeout(completeTimer);
     };
   }, [onComplete]);
+
+  const renderLine = (line: string, index: number) => {
+    if (line.includes('name:')) {
+      return (
+        <>
+          <span className="text-muted-foreground">  name: </span>
+          <span className="text-primary">{line.includes('"') ? line.split('name: ')[1] : ''}</span>
+        </>
+      );
+    }
+    if (line.includes('location:')) {
+      return (
+        <>
+          <span className="text-muted-foreground">  location: </span>
+          <span className="text-primary">{line.includes('"') ? line.split('location: ')[1] : ''}</span>
+        </>
+      );
+    }
+    if (line.includes('passion:')) {
+      return (
+        <>
+          <span className="text-muted-foreground">  passion: </span>
+          <span className="text-primary">{line.includes('"') ? line.split('passion: ')[1] : ''}</span>
+        </>
+      );
+    }
+    if (line.includes('status:')) {
+      return (
+        <>
+          <span className="text-muted-foreground">  status: </span>
+          <span className="text-green-400">{line.includes('"') ? line.split('status: ')[1] : ''}</span>
+        </>
+      );
+    }
+    if (line.includes('const')) {
+      return (
+        <>
+          <span className="text-purple-400">const </span>
+          <span className="text-foreground">{line.replace('const ', '')}</span>
+        </>
+      );
+    }
+    if (line.includes('console')) {
+      const parts = line.split('console');
+      return (
+        <>
+          {parts[0]}
+          <span className="text-yellow-400">console</span>
+          {parts[1]?.includes('.') && (
+            <>
+              <span className="text-muted-foreground">.</span>
+              <span className="text-blue-400">{parts[1].split('.')[1]?.split('(')[0]}</span>
+              {parts[1].includes('(') && (
+                <>
+                  <span className="text-muted-foreground">(</span>
+                  <span className="text-primary">{parts[1].split('(')[1]?.split(')')[0]}</span>
+                  {parts[1].includes(')') && <span className="text-muted-foreground">){parts[1].split(')')[1]}</span>}
+                </>
+              )}
+            </>
+          )}
+        </>
+      );
+    }
+    if (line === '};') {
+      return <span className="text-foreground">{'};'}</span>;
+    }
+    return <span className="text-foreground">{line || '\u00A0'}</span>;
+  };
 
   return (
     <AnimatePresence>
@@ -111,67 +200,17 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
               </div>
 
               {/* Code content */}
-              <div className="p-4 font-code text-sm">
-                {codeLines.slice(0, currentLine + 1).map((line, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-                    className="flex"
-                  >
+              <div className="p-4 font-code text-sm min-h-[220px]">
+                {codeLines.map((_, index) => (
+                  <div key={index} className="flex">
                     <span className="text-muted-foreground w-6 select-none">{index + 1}</span>
                     <span className="text-foreground/90">
-                      {line.includes('name') && (
-                        <>
-                          <span className="text-muted-foreground">  name: </span>
-                          <span className="text-primary">"Emanuel Teferi"</span>
-                          <span className="text-muted-foreground">,</span>
-                        </>
+                      {visibleLines[index] !== undefined ? renderLine(visibleLines[index], index) : ''}
+                      {index === currentLineIndex && currentLineIndex < codeLines.length && (
+                        <span className="inline-block w-2 h-4 bg-primary ml-0.5 animate-pulse" />
                       )}
-                      {line.includes('location') && (
-                        <>
-                          <span className="text-muted-foreground">  location: </span>
-                          <span className="text-primary">"Addis Ababa"</span>
-                          <span className="text-muted-foreground">,</span>
-                        </>
-                      )}
-                      {line.includes('passion') && (
-                        <>
-                          <span className="text-muted-foreground">  passion: </span>
-                          <span className="text-primary">"Web Development"</span>
-                          <span className="text-muted-foreground">,</span>
-                        </>
-                      )}
-                      {line.includes('status') && (
-                        <>
-                          <span className="text-muted-foreground">  status: </span>
-                          <span className="text-green-400">"Available"</span>
-                        </>
-                      )}
-                      {line.includes('const') && (
-                        <>
-                          <span className="text-purple-400">const </span>
-                          <span className="text-foreground">developer = {'{'}</span>
-                        </>
-                      )}
-                      {line === '};' && <span className="text-foreground">{'};'}</span>}
-                      {line.includes('console') && (
-                        <>
-                          <span className="text-yellow-400">console</span>
-                          <span className="text-muted-foreground">.</span>
-                          <span className="text-blue-400">log</span>
-                          <span className="text-muted-foreground">(</span>
-                          <span className="text-primary">"Building your vision..."</span>
-                          <span className="text-muted-foreground">);</span>
-                        </>
-                      )}
-                      {line === '' && <span>&nbsp;</span>}
                     </span>
-                    {index === currentLine && (
-                      <span className="w-2 h-5 bg-primary ml-1 cursor-blink" />
-                    )}
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </motion.div>
