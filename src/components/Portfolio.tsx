@@ -10,6 +10,7 @@ import duskAddisImg from '@/assets/portfolio/dusk-addis.png';
 import blingDentalImg from '@/assets/portfolio/bling-dental.png';
 import rainbowDecorImg from '@/assets/portfolio/rainbow-decor.png';
 import blackPotionImg from '@/assets/portfolio/black-potion.png';
+import momensSalonImg from '@/assets/portfolio/momens-salon.png';
 
 const projects = [
   {
@@ -19,9 +20,9 @@ const projects = [
     before: 'No website, only WhatsApp & walk-ins, losing modern customers',
     solution: 'Full site with services list, pricing, gallery, easy booking links and map',
     outcome: 'Increase in quality walk-ins and WhatsApp inquiries; customers trust clear pricing',
-    website: null,
-    github: null,
-    image: null,
+    website: 'https://momenssalon.lovable.app/#',
+    github: 'https://github.com/webniereagency/momenssalon-39538efe',
+    image: momensSalonImg,
   },
   {
     name: 'Cherchis Café',

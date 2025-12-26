@@ -3,11 +3,11 @@ import { Preloader } from '@/components/Preloader';
 import { Navbar } from '@/components/Navbar';
 import { Hero } from '@/components/Hero';
 import { About } from '@/components/About';
+import { Testimonials } from '@/components/Testimonials';
 import { Services } from '@/components/Services';
 import { Portfolio } from '@/components/Portfolio';
 import { Contact } from '@/components/Contact';
 import { Footer } from '@/components/Footer';
-
 const Index = () => {
   const [showPreloader, setShowPreloader] = useState(true);
   const [hasSeenPreloader, setHasSeenPreloader] = useState(false);
@@ -40,6 +40,7 @@ const Index = () => {
         <main>
           <Hero />
           <About />
+          <Testimonials />
           <Services />
           <Portfolio />
           <Contact />
