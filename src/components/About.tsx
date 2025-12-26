@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/contexts/LanguageContext';
 import emanuelPhoto from '@/assets/emanuel-photo.png';
 
 export function About() {
+  const { t } = useLanguage();
+
   return (
     <section id="about" className="py-24 relative overflow-hidden">
       {/* Background gradient */}
@@ -43,7 +46,7 @@ export function About() {
               >
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" />
-                  <span className="text-sm font-medium text-foreground">Available for hire</span>
+                  <span className="text-sm font-medium text-foreground">{t('about.availableForHire')}</span>
                 </div>
               </motion.div>
             </div>
@@ -57,45 +60,24 @@ export function About() {
             transition={{ duration: 0.6 }}
           >
             <span className="text-primary font-code text-sm uppercase tracking-widest mb-4 block">
-              {'<'} About Me {'/>'} 
+              {'<'} {t('about.sectionTag')} {'/>'} 
             </span>
             
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
-              Building <span className="gradient-text">Digital Bridges</span> in Ethiopia
+              {t('about.title')} <span className="gradient-text">{t('about.titleHighlight')}</span> {t('about.titleSuffix')}
             </h2>
 
             <div className="space-y-4 text-muted-foreground">
-              <p>
-                My name is Emmanuel Tafari, an Ethiopian-based web developer who started 
-                learning to code around the age of 10 — mostly out of curiosity and a love 
-                for figuring out how things work. For years, I balanced that curiosity with 
-                school, focusing heavily on academics and doing pretty well along the way.
-              </p>
-              <p>
-                Then Grade 12 happened. Like many Ethiopian students, things didn't go as 
-                planned — and honestly, that moment became a wake-up call. I leaned fully 
-                into the skill I had quietly been building for years and decided to take 
-                it seriously.
-              </p>
-              <p>
-                Today, I help cafés, salons, clinics, and local businesses in Addis Ababa 
-                show up online with modern, practical websites that actually solve real 
-                problems — from visibility to bookings and orders. I keep things simple: 
-                understand the business, build what's needed, and deliver something owners 
-                are proud to share.
-              </p>
-              <p>
-                Beyond client work, I'm an entrepreneur at heart. Web development is not 
-                just what I do — it's the foundation I'm using to build bigger ideas and 
-                contribute, in my own way, to how Ethiopia is represented to the world 
-                through technology.
-              </p>
+              <p>{t('about.paragraph1')}</p>
+              <p>{t('about.paragraph2')}</p>
+              <p>{t('about.paragraph3')}</p>
+              <p>{t('about.paragraph4')}</p>
             </div>
 
             {/* Skills */}
             <div className="mt-8 pt-8 border-t border-border/50">
               <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">
-                Technologies
+                {t('about.technologies')}
               </h3>
               <div className="flex flex-wrap gap-2">
                 {['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Node.js', 'Python'].map((skill) => (

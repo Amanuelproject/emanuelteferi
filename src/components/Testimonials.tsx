@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Quote, Star } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const testimonials = [
   {
@@ -46,6 +47,7 @@ const testimonials = [
 ];
 
 export function Testimonials() {
+  const { t } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isInView, setIsInView] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -100,13 +102,13 @@ export function Testimonials() {
           className="text-center max-w-2xl mx-auto mb-16"
         >
           <span className="text-primary font-code text-sm uppercase tracking-widest mb-4 block">
-            {'<'} Testimonials {'/>'} 
+            {'<'} {t('testimonials.sectionTag')} {'/>'} 
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
-            What <span className="gradient-text">Clients</span> Say
+            {t('testimonials.title')} <span className="gradient-text">{t('testimonials.titleHighlight')}</span> {t('testimonials.titleSuffix')}
           </h2>
           <p className="text-muted-foreground text-lg">
-            Real stories from real Ethiopian businesses who trusted me with their digital presence.
+            {t('testimonials.description')}
           </p>
         </motion.div>
 
@@ -218,7 +220,7 @@ export function Testimonials() {
           className="mt-12 text-center"
         >
           <p className="text-muted-foreground text-sm font-code">
-            // በደንበኞች የተሰጠ ግብረ-መልስ • Trusted by businesses across Ethiopia
+            {t('testimonials.localTouch')}
           </p>
         </motion.div>
       </div>

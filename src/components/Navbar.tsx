@@ -3,30 +3,25 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/contexts/LanguageContext';
 import logo from '@/assets/logo.png';
-
-const navLinks = [
-  { href: '#home', label: 'Home' },
-  { href: '#about', label: 'About' },
-  { href: '#services', label: 'Services' },
-  { href: '/start-project', label: 'Start Project', isPage: true },
-  { href: '#portfolio', label: 'Portfolio' },
-  { href: '#contact', label: 'Contact' },
-];
-
-const languages = [
-  { code: 'en', label: 'English' },
-  { code: 'am', label: 'አማርኛ' },
-  { code: 'or', label: 'Afaan Oromo' },
-];
 
 export function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { language, setLanguage, t, languages } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState('en');
   const [showLangDropdown, setShowLangDropdown] = useState(false);
+
+  const navLinks = [
+    { href: '#home', labelKey: 'nav.home' },
+    { href: '#about', labelKey: 'nav.about' },
+    { href: '#services', labelKey: 'nav.services' },
+    { href: '/start-project', labelKey: 'nav.startProject', isPage: true },
+    { href: '#portfolio', labelKey: 'nav.portfolio' },
+    { href: '#contact', labelKey: 'nav.contact' },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -90,7 +85,7 @@ export function Navbar() {
                   onClick={() => handleNavClick(link.href, link.isPage)}
                   className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300 relative group"
                 >
-                  {link.label}
+                  {t(link.labelKey)}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
                 </button>
               ))}
@@ -105,7 +100,7 @@ export function Navbar() {
                   className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   <Globe className="w-4 h-4" />
-                  <span className="hidden sm:block">{languages.find(l => l.code === currentLang)?.label}</span>
+                  <span className="hidden sm:block">{languages.find(l => l.code === language)?.label}</span>
                 </button>
                 
                 <AnimatePresence>
@@ -114,17 +109,17 @@ export function Navbar() {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
-                      className="absolute right-0 top-full mt-2 bg-card border border-border rounded-lg shadow-lg overflow-hidden min-w-[140px]"
+                      className="absolute right-0 top-full mt-2 bg-card border border-border rounded-lg shadow-lg overflow-hidden min-w-[140px] z-50"
                     >
                       {languages.map((lang) => (
                         <button
                           key={lang.code}
                           onClick={() => {
-                            setCurrentLang(lang.code);
+                            setLanguage(lang.code);
                             setShowLangDropdown(false);
                           }}
                           className={`w-full px-4 py-2 text-left text-sm hover:bg-secondary transition-colors ${
-                            currentLang === lang.code ? 'text-primary' : 'text-foreground'
+                            language === lang.code ? 'text-primary' : 'text-foreground'
                           }`}
                         >
                           {lang.label}
@@ -142,7 +137,7 @@ export function Navbar() {
                 onClick={() => handleNavClick('#contact')}
                 className="hidden sm:flex"
               >
-                Let's Talk
+                {t('nav.letsTalk')}
               </Button>
 
               {/* Mobile Menu Button */}
@@ -177,7 +172,7 @@ export function Navbar() {
                   transition={{ delay: index * 0.1 }}
                   className="text-2xl font-medium text-foreground hover:text-primary transition-colors"
                 >
-                  {link.label}
+                  {t(link.labelKey)}
                 </motion.button>
               ))}
               <motion.div
@@ -186,7 +181,7 @@ export function Navbar() {
                 transition={{ delay: 0.5 }}
               >
                 <Button variant="hero" size="lg" onClick={() => handleNavClick('#contact')}>
-                  Let's Talk
+                  {t('nav.letsTalk')}
                 </Button>
               </motion.div>
             </div>
