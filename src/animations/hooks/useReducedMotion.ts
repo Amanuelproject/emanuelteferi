@@ -1,9 +1,5 @@
 import { useState, useEffect } from 'react';
 
-/**
- * Hook to detect if user prefers reduced motion
- * Respects accessibility preferences
- */
 export function useReducedMotion(): boolean {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
