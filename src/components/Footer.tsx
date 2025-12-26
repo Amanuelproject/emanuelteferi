@@ -50,8 +50,10 @@ export function Footer() {
             transition={{ duration: 0.5 }}
           >
             <a href="#home" onClick={(e) => { e.preventDefault(); handleNavClick('#home'); }} className="flex items-center gap-3 mb-4 cursor-pointer">
-              <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/40">
-                <img src={logo} alt="Emanuel Teferi" className="w-full h-full object-cover" />
+              <div className="relative">
+                <div className="absolute inset-0 rounded-full border-2 border-primary/60 animate-pulse" style={{ margin: '-4px', padding: '4px' }} />
+                <div className="absolute inset-0 rounded-full bg-primary/10" style={{ margin: '-2px', padding: '2px' }} />
+                <img src={logo} alt="Emanuel Teferi" className="w-10 h-10 object-contain relative z-10" />
               </div>
               <span className="font-semibold text-xl text-foreground">
                 Emanuel<span className="text-primary">.</span>
