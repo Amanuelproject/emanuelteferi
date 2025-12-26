@@ -3,19 +3,28 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Code2, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
-const typingTexts = [
-  'Web Developer',
-  'UI/UX Designer',
-  'Problem Solver',
-  'Your Digital Partner',
-];
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export function Hero() {
   const navigate = useNavigate();
+  const { t, language } = useLanguage();
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
+
+  const typingTexts = [
+    t('hero.typingTexts.webDeveloper'),
+    t('hero.typingTexts.designer'),
+    t('hero.typingTexts.problemSolver'),
+    t('hero.typingTexts.digitalPartner'),
+  ];
+
+  useEffect(() => {
+    // Reset typing when language changes
+    setDisplayText('');
+    setCurrentTextIndex(0);
+    setIsDeleting(false);
+  }, [language]);
 
   useEffect(() => {
     const currentFullText = typingTexts[currentTextIndex];
@@ -38,7 +47,7 @@ export function Hero() {
     }, isDeleting ? 50 : 100);
 
     return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, currentTextIndex]);
+  }, [displayText, isDeleting, currentTextIndex, typingTexts]);
 
   const handleScroll = (href: string) => {
     const element = document.querySelector(href);
@@ -102,7 +111,7 @@ export function Hero() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8"
           >
             <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm text-primary font-medium">Available for projects</span>
+            <span className="text-sm text-primary font-medium">{t('hero.available')}</span>
           </motion.div>
 
           {/* Main heading */}
@@ -112,7 +121,7 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6"
           >
-            <span className="text-foreground">I'm </span>
+            <span className="text-foreground">{t('hero.intro')} </span>
             <span className="gradient-text">Emanuel Teferi</span>
           </motion.h1>
 
@@ -137,9 +146,7 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10"
           >
-            Building premium web experiences for Ethiopian businesses. 
-            Transforming ideas into digital reality with modern, 
-            professional websites that drive real results.
+            {t('hero.description')}
           </motion.p>
 
           {/* CTA Buttons with glow effect */}
@@ -150,10 +157,10 @@ export function Hero() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <Button variant="hero" size="xl" onClick={() => handleScroll('#portfolio')}>
-              View My Work
+              {t('hero.viewWork')}
             </Button>
             <Button variant="heroOutline" size="xl" onClick={() => navigate('/start-project')}>
-              Let's Get Started
+              {t('hero.getStarted')}
             </Button>
           </motion.div>
 
@@ -165,15 +172,15 @@ export function Hero() {
             className="grid grid-cols-3 gap-8 mt-16 pt-16 border-t border-border/30"
           >
             {[
-              { value: '3+', label: 'Years Experience' },
-              { value: '15+', label: 'Projects Completed' },
-              { value: '100%', label: 'Client Satisfaction' },
+              { value: '3+', labelKey: 'hero.stats.yearsExperience' },
+              { value: '15+', labelKey: 'hero.stats.projectsCompleted' },
+              { value: '100%', labelKey: 'hero.stats.clientSatisfaction' },
             ].map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-1">
                   {stat.value}
                 </div>
-                <div className="text-xs sm:text-sm text-muted-foreground">{stat.label}</div>
+                <div className="text-xs sm:text-sm text-muted-foreground">{t(stat.labelKey)}</div>
               </div>
             ))}
           </motion.div>

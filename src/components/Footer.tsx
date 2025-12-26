@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Facebook, Instagram, Github, Linkedin, Heart } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 import logo from '@/assets/logo.png';
 
 const socialLinks = [
@@ -9,15 +10,17 @@ const socialLinks = [
   { icon: Facebook, href: '#', label: 'Facebook' },
 ];
 
-const footerLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Contact', href: '#contact' },
-];
-
 export function Footer() {
+  const { t } = useLanguage();
+
+  const footerLinks = [
+    { labelKey: 'nav.home', href: '#home' },
+    { labelKey: 'nav.about', href: '#about' },
+    { labelKey: 'nav.services', href: '#services' },
+    { labelKey: 'nav.portfolio', href: '#portfolio' },
+    { labelKey: 'nav.contact', href: '#contact' },
+  ];
+
   const handleNavClick = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
@@ -46,8 +49,7 @@ export function Footer() {
               </span>
             </a>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Building premium web experiences for Ethiopian businesses. 
-              Transforming ideas into digital reality.
+              {t('footer.description')}
             </p>
           </motion.div>
 
@@ -58,15 +60,15 @@ export function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <h3 className="font-semibold text-foreground mb-4">Quick Links</h3>
+            <h3 className="font-semibold text-foreground mb-4">{t('footer.quickLinks')}</h3>
             <ul className="space-y-2">
               {footerLinks.map((link) => (
-                <li key={link.label}>
+                <li key={link.labelKey}>
                   <button
                     onClick={() => handleNavClick(link.href)}
                     className="text-muted-foreground hover:text-primary transition-colors text-sm"
                   >
-                    {link.label}
+                    {t(link.labelKey)}
                   </button>
                 </li>
               ))}
@@ -80,7 +82,7 @@ export function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <h3 className="font-semibold text-foreground mb-4">Get In Touch</h3>
+            <h3 className="font-semibold text-foreground mb-4">{t('footer.getInTouch')}</h3>
             <div className="space-y-2 text-sm text-muted-foreground">
               <p>Addis Ababa, Ethiopia</p>
               <p>+251 962 025 394</p>
@@ -108,10 +110,10 @@ export function Footer() {
         <div className="pt-8 border-t border-border/50">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} Emanuel Teferi. All rights reserved.
+              © {new Date().getFullYear()} Emanuel Teferi. {t('footer.allRightsReserved')}
             </p>
             <p className="text-sm text-muted-foreground flex items-center gap-1">
-              Made with <Heart className="w-4 h-4 text-primary" /> in Addis Ababa
+              {t('footer.madeWith')} <Heart className="w-4 h-4 text-primary" /> {t('footer.inAddis')}
             </p>
           </div>
         </div>

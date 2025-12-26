@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { ExternalLink, Github } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // Import portfolio images
 import cherchisCafeImg from '@/assets/portfolio/cherchis-cafe.png';
@@ -104,6 +105,8 @@ const projects = [
 ];
 
 export function Portfolio() {
+  const { t } = useLanguage();
+
   return (
     <section id="portfolio" className="py-24 relative overflow-hidden bg-card/30">
       {/* Background pattern */}
@@ -126,14 +129,13 @@ export function Portfolio() {
           className="text-center max-w-2xl mx-auto mb-16"
         >
           <span className="text-primary font-code text-sm uppercase tracking-widest mb-4 block">
-            {'<'} Portfolio {'/>'} 
+            {'<'} {t('portfolio.sectionTag')} {'/>'} 
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
-            Real <span className="gradient-text">Results</span> for Real Businesses
+            {t('portfolio.title')} <span className="gradient-text">{t('portfolio.titleHighlight')}</span> {t('portfolio.titleSuffix')}
           </h2>
           <p className="text-muted-foreground text-lg">
-            Each project tells a story of transformation. From struggling with 
-            WhatsApp-only presence to thriving with professional websites.
+            {t('portfolio.description')}
           </p>
         </motion.div>
 
@@ -161,7 +163,7 @@ export function Portfolio() {
                     </p>
                   </div>
                   <span className="px-2 py-1 text-xs font-code rounded bg-primary/10 text-primary">
-                    Case Study
+                    {t('portfolio.caseStudy')}
                   </span>
                 </div>
 
@@ -169,19 +171,19 @@ export function Portfolio() {
                 <div className="space-y-3 mb-4">
                   <div className="flex gap-3">
                     <span className="text-xs font-semibold text-destructive uppercase tracking-wider shrink-0 w-16">
-                      Before
+                      {t('portfolio.before')}
                     </span>
                     <p className="text-sm text-muted-foreground">{project.before}</p>
                   </div>
                   <div className="flex gap-3">
                     <span className="text-xs font-semibold text-primary uppercase tracking-wider shrink-0 w-16">
-                      Solution
+                      {t('portfolio.solution')}
                     </span>
                     <p className="text-sm text-muted-foreground">{project.solution}</p>
                   </div>
                   <div className="flex gap-3">
                     <span className="text-xs font-semibold text-green-500 uppercase tracking-wider shrink-0 w-16">
-                      Result
+                      {t('portfolio.result')}
                     </span>
                     <p className="text-sm text-muted-foreground">{project.outcome}</p>
                   </div>
@@ -193,7 +195,7 @@ export function Portfolio() {
                     <Button variant="outline" size="sm" asChild>
                       <a href={project.website} target="_blank" rel="noopener noreferrer">
                         <ExternalLink className="w-4 h-4 mr-1" />
-                        Visit Site
+                        {t('portfolio.visitSite')}
                       </a>
                     </Button>
                   )}
@@ -201,7 +203,7 @@ export function Portfolio() {
                     <Button variant="ghost" size="sm" asChild>
                       <a href={project.github} target="_blank" rel="noopener noreferrer">
                         <Github className="w-4 h-4 mr-1" />
-                        Code
+                        {t('portfolio.code')}
                       </a>
                     </Button>
                   )}
@@ -229,7 +231,7 @@ export function Portfolio() {
                     />
                     <div className="absolute inset-0 bg-primary/0 group-hover/image:bg-primary/10 transition-colors duration-300 flex items-center justify-center">
                       <span className="opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 bg-background/90 px-4 py-2 rounded-lg text-sm font-medium text-foreground">
-                        View Live Site
+                        {t('portfolio.viewLiveSite')}
                       </span>
                     </div>
                   </div>
@@ -251,7 +253,7 @@ export function Portfolio() {
           className="mt-12 text-center"
         >
           <p className="text-muted-foreground italic">
-            "In Addis, customers trust businesses with websites. It's the new word-of-mouth."
+            {t('portfolio.localInsight')}
           </p>
         </motion.div>
       </div>

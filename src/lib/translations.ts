@@ -1171,7 +1171,7 @@ export const translations = {
         whatsappChat: {
           en: 'WhatsApp chat integration',
           am: 'የWhatsApp ውይይት ውህደት',
-          or: 'Walitti makamuu mari'ii WhatsApp',
+          or: "Walitti makamuu mari'ii WhatsApp",
           ti: 'ናይ WhatsApp ዕላል ውህደት',
           so: 'Isdhexgalka sheekada WhatsApp',
         },

@@ -1,40 +1,43 @@
 import { motion } from 'framer-motion';
 import { Code, Users, Zap, Globe, Smartphone, Search } from 'lucide-react';
-
-const services = [
-  {
-    icon: Globe,
-    title: 'Business Websites',
-    description: 'Professional websites that showcase your business, services, and build customer trust.',
-  },
-  {
-    icon: Smartphone,
-    title: 'Mobile-First Design',
-    description: 'Responsive designs that look stunning on phones, tablets, and desktops.',
-  },
-  {
-    icon: Code,
-    title: 'Custom Development',
-    description: 'Tailored solutions with booking forms, galleries, menus, and more.',
-  },
-  {
-    icon: Search,
-    title: 'Google Visibility',
-    description: 'Get found online with proper SEO and Google Business integration.',
-  },
-  {
-    icon: Users,
-    title: 'Customer Connection',
-    description: 'WhatsApp integration, contact forms, and easy booking systems.',
-  },
-  {
-    icon: Zap,
-    title: 'Fast & Reliable',
-    description: 'Lightning-fast loading with ongoing support and updates.',
-  },
-];
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export function Services() {
+  const { t } = useLanguage();
+
+  const services = [
+    {
+      icon: Globe,
+      titleKey: 'services.items.businessWebsites.title',
+      descriptionKey: 'services.items.businessWebsites.description',
+    },
+    {
+      icon: Smartphone,
+      titleKey: 'services.items.mobileFirst.title',
+      descriptionKey: 'services.items.mobileFirst.description',
+    },
+    {
+      icon: Code,
+      titleKey: 'services.items.customDev.title',
+      descriptionKey: 'services.items.customDev.description',
+    },
+    {
+      icon: Search,
+      titleKey: 'services.items.googleVisibility.title',
+      descriptionKey: 'services.items.googleVisibility.description',
+    },
+    {
+      icon: Users,
+      titleKey: 'services.items.customerConnection.title',
+      descriptionKey: 'services.items.customerConnection.description',
+    },
+    {
+      icon: Zap,
+      titleKey: 'services.items.fastReliable.title',
+      descriptionKey: 'services.items.fastReliable.description',
+    },
+  ];
+
   return (
     <section id="services" className="py-24 relative overflow-hidden">
       {/* Background elements */}
@@ -53,14 +56,13 @@ export function Services() {
           className="text-center max-w-2xl mx-auto mb-16"
         >
           <span className="text-primary font-code text-sm uppercase tracking-widest mb-4 block">
-            {'<'} Services {'/>'} 
+            {'<'} {t('services.sectionTag')} {'/>'} 
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
-            What I <span className="gradient-text">Build</span> For You
+            {t('services.title')} <span className="gradient-text">{t('services.titleHighlight')}</span> {t('services.titleSuffix')}
           </h2>
           <p className="text-muted-foreground text-lg">
-            Every Ethiopian business deserves a professional online presence. 
-            I create websites that help you reach more customers and grow.
+            {t('services.description')}
           </p>
         </motion.div>
 
@@ -68,7 +70,7 @@ export function Services() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <motion.div
-              key={service.title}
+              key={service.titleKey}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -86,10 +88,10 @@ export function Services() {
 
                 {/* Content */}
                 <h3 className="text-xl font-semibold mb-2 text-foreground group-hover:text-primary transition-colors duration-300">
-                  {service.title}
+                  {t(service.titleKey)}
                 </h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">
-                  {service.description}
+                  {t(service.descriptionKey)}
                 </p>
               </div>
             </motion.div>
@@ -104,10 +106,10 @@ export function Services() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-center mt-16"
         >
-          <p className="text-muted-foreground mb-2">Starting at</p>
+          <p className="text-muted-foreground mb-2">{t('services.startingAt')}</p>
           <p className="text-4xl font-bold text-primary mb-4">10,000 ETB</p>
           <p className="text-sm text-muted-foreground">
-            Final price depends on features and complexity
+            {t('services.priceNote')}
           </p>
         </motion.div>
       </div>
