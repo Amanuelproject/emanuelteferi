@@ -113,7 +113,7 @@ export const translations = {
     },
     description: {
       en: 'Building premium web experiences for Ethiopian businesses. Transforming ideas into digital reality with modern, professional websites that drive real results.',
-      am: 'ለኢትዮጵያውያን ንግዶች የላቀ የድረ-ገጽ ልምድ እገነባለሁ። ሃሳቦችን ወደ ዲጂታል እውነታ እቀይራለሁ - ዘመናዊና ፕሮፌሽናል ድረ-ገጾች በእውነተኛ ውጤት።',
+      am: 'ለኢትዮጵያውያን business-ዎች የላቀ የድረ-ገጽ ልምድ እገነባለሁ። ሃሳቦችን ወደ ዲጂታል እውነታ እቀይራለሁ - ዘመናዊና ፕሮፌሽናል ድረ-ገጾች በእውነተኛ ውጤት።',
       or: "Muuxannoo weebsaayitii olaanaa daldala Itoophiyaatiif ijaara. Yaad-rimee gara dhugaa dijitaalaatti jijjiira - weebsaayitoota ammayyaa fi ogummaan bu'aa dhugaa argamsiisan.",
       ti: 'ንኢትዮጵያውያን ንግዳት ልዑል ወብ ተመኩሮ እሃንጽ። ሓሳባት ናብ ዲጂታል ሓቂ እቕይር - ዘመናውን ሞያውን ወብሳይታት ብሓቀኛ ውጽኢት።',
       so: 'Waxaan dhisaa khibrado websaydhka oo heer sare ah ganacsiyada Itoophiya. Fikradaha waxaan u beddelaa xaqiiq dhijitaal ah - websaydhyada casriga ah oo xirfad leh oo keena natiijooyin dhab ah.',
@@ -203,7 +203,7 @@ export const translations = {
     },
     paragraph3: {
       en: "Today, I help cafés, salons, clinics, and local businesses in Addis Ababa show up online with modern, practical websites that actually solve real problems — from visibility to bookings and orders. I keep things simple: understand the business, build what's needed, and deliver something owners are proud to share.",
-      am: 'ዛሬ፣ ካፌዎችን፣ ሳሎኖችን፣ ክሊኒኮችንና በአዲስ አበባ ያሉ አካባቢያዊ ንግዶችን በዘመናዊና ተግባራዊ ድረ-ገጾች ኦንላይን እንዲታዩ እረዳቸዋለሁ - እውነተኛ ችግሮችን የሚፈቱ፣ ከታይነት ጀምሮ እስከ ቦታ ማስያዝና ትዕዛዝ። ነገሮችን ቀላል አደርጋለሁ: ንግዱን መረዳት፣ የሚያስፈልገውን መገንባት፣ ባለቤቶች ለማጋራት የሚኮሩበትን ማቅረብ።',
+      am: 'ዛሬ፣ ካፌዎችን፣ ሳሎኖችን፣ ክሊኒኮችንና በአዲስ አበባ ያሉ አካባቢያዊ business-ዎችን በዘመናዊና ተግባራዊ ድረ-ገጾች ኦንላይን እንዲታዩ እረዳቸዋለሁ - እውነተኛ ችግሮችን የሚፈቱ፣ ከታይነት ጀምሮ እስከ ቦታ ማስያዝና ትዕዛዝ። ነገሮችን ቀላል አደርጋለሁ: business-ውን መረዳት፣ የሚያስፈልገውን መገንባት፣ ባለቤቶች ለማጋራት የሚኮሩበትን ማቅረብ።',
       or: "Har'a, kaaffeewwan, salonoota, kilinikoota, fi daldaltoota naannoo Finfinnee keessa jiran weebsaayitii ammayyaa fi hojiirra ooluu danda'uun toora irratti akka mul'atan nan gargaara - rakkoolee dhugaa kan furru, mul'achuu irraa hanga qopheessuu fi ajajuutti. Wantoota salphaa nan godha: daldala hubachuu, waan barbaachisu ijaaruu, abbaan qabeenyaa qooduu danda'an dhiheessuu.",
       ti: 'ሎሚ፣ ንካፌታት፣ ሳሎናት፣ ክሊኒካትን ኣብ ኣዲስ ኣበባ ዘለዉ ኣከባብያዊ ንግዳትን ብዘመናውን ተግባራውን ወብሳይታት ኦንላይን ክርኣዩ እሕግዞም - ሓቀኛ ጸገማት ዝፈትሑ፣ ካብ ምርኣይ ጀሚሩ ክሳብ ቦታ ምእዛዝን ትእዛዝን። ነገራት ቀሊል እገብሮ: ንግዲ ምርዳእ፣ ዘድሊ ምህናጽ፣ ወነንቲ ንምክፋል ዝሕበኑሉ ምቕራብ።',
       so: 'Maanta, waxaan caawiyaa qahwayaasha, saloonnada, isbitaallada, iyo ganacsiyada deegaanka ee Addis Ababa inay ku soo muuqdaan onlaynka iyagoo leh websaydhyo casri ah oo shaqaynaya oo xalliya dhibaatooyinka dhabta ah - laga bilaabo muuqaalka ilaa ballansashada iyo dalabka. Waxaan wax ka dhigayaa kuwo fudud: fahamka ganacsiga, dhisidda waxa loo baahan yahay, iyo bixinta wax ay milkiilayaashu ku faanaan inay wadaagaan.',
@@ -263,7 +263,7 @@ export const translations = {
     },
     description: {
       en: 'Every Ethiopian business deserves a professional online presence. I create websites that help you reach more customers and grow.',
-      am: 'ሁሉም ኢትዮጵያዊ ንግድ ፕሮፌሽናል የኦንላይን መገኘት ይገባዋል። ብዙ ደንበኞችን እንዲደርሱና እንዲያድጉ የሚረዱ ድረ-ገጾች እፈጥራለሁ።',
+      am: 'ሁሉም ኢትዮጵያዊ business ፕሮፌሽናል የኦንላይን መገኘት ይገባዋል። ብዙ ደንበኞችን እንዲደርሱና እንዲያድጉ የሚረዱ ድረ-ገጾች እፈጥራለሁ።',
       or: "Daldalli Itoophiyaa hunduu argamuu toora irra ogummaa qabu ni ta'a. Weebsaayitoota maamiltootaa baay'ee bira ga'uuf fi guddachuuf isin gargaaran nan uuma.",
       ti: 'ኩሉ ኢትዮጵያዊ ንግዲ ሞያዊ ኦንላይን ምርኣይ ይግብኦ። ብዙሓት ዓማዊል ክትበጽሑን ክትዓብዩን ዝሕግዙ ወብሳይታት እፈጥር።',
       so: 'Ganacsi kasta oo Itoobiyaan ah waxay xaq u leedahay in ay joogaan onlayn xirfad leh. Waxaan abuuraa websaydhyo ku caawiya inaad gaarto macaamiil badan oo aad korto.',
@@ -272,14 +272,14 @@ export const translations = {
       businessWebsites: {
         title: {
           en: 'Business Websites',
-          am: 'የንግድ ድረ-ገጾች',
+          am: 'የBusiness ድረ-ገጾች',
           or: 'Weebsaayitii Daldala',
           ti: 'ናይ ንግዲ ወብሳይታት',
           so: 'Websaydhyada Ganacsiga',
         },
         description: {
           en: 'Professional websites that showcase your business, services, and build customer trust.',
-          am: 'ንግድዎን፣ አገልግሎቶችዎን የሚያሳዩና የደንበኛ እምነት የሚገነቡ ፕሮፌሽናል ድረ-ገጾች።',
+          am: 'Business-ዎን፣ አገልግሎቶችዎን የሚያሳዩና የደንበኛ እምነት የሚገነቡ ፕሮፌሽናል ድረ-ገጾች።',
           or: 'Weebsaayitii ogummaa daldala keessan, tajaajila keessanii fi amantaa maamiltootaa ijaaru.',
           ti: 'ንግድኹም፣ ኣገልግሎታትኩም ዘርእዩን ናይ ዓማዊል እምነት ዝሃንጹን ሞያዊ ወብሳይታት።',
           so: 'Websaydhyo xirfad leh oo muujinaya ganacsigaaga, adeegyadaada, oo dhisaya kalsooni macaamiisha.',
@@ -327,7 +327,7 @@ export const translations = {
         },
         description: {
           en: 'Get found online with proper SEO and Google Business integration.',
-          am: 'በትክክለኛ SEO እና የጎግል ንግድ ውህደት ኦንላይን ይገኙ።',
+          am: 'በትክክለኛ SEO እና የጎግል Business ውህደት ኦንላይን ይገኙ።',
           or: 'SEO sirrii fi walitti makamuu Google Business\'n toora irratti argamaa.',
           ti: 'ብግቡእ SEO ን ናይ ጉግል ንግዲ ውህደትን ኦንላይን ተረኸቡ።',
           so: 'Lagu helo onlayn SEO sax ah iyo isdhexgalka Google Business.',
@@ -407,7 +407,7 @@ export const translations = {
     },
     titleSuffix: {
       en: 'for Real Businesses',
-      am: 'ለእውነተኛ ንግዶች',
+      am: 'ለእውነተኛ Business-ዎች',
       or: 'Daldala Dhugaatiif',
       ti: 'ንሓቀኛ ንግዳት',
       so: 'Ganacsiyada Dhabta ah',
@@ -470,7 +470,7 @@ export const translations = {
     },
     localInsight: {
       en: '"In Addis, customers trust businesses with websites. It\'s the new word-of-mouth."',
-      am: '"በአዲስ አበባ ደንበኞች ድረ-ገጽ ያላቸውን ንግዶች ያምናሉ። አዲሱ የአፍ ወሬ ነው።"',
+      am: '"በአዲስ አበባ ደንበኞች ድረ-ገጽ ያላቸውን business-ዎች ያምናሉ። አዲሱ የአፍ ወሬ ነው።"',
       or: '"Finfinnee keessatti, maamiltonni daldala weebsaayitii qaban ni amantu. Oduu afaanii haaraa dha."',
       ti: '"ኣብ ኣዲስ ኣበባ ዓማዊል ወብሳይት ዘለዎም ንግዳት ይኣምኑ። ሓድሽ ናይ ኣፍ ወረ እዩ።"',
       so: '"Addis, macaamiishu waxay aamminaan ganacsiyada leh websaydhyada. Waa af-hayeenka cusub."',
@@ -509,14 +509,14 @@ export const translations = {
     },
     description: {
       en: 'Real stories from real Ethiopian businesses who trusted me with their digital presence.',
-      am: 'ዲጂታል መገኘታቸውን ያመኑኝ ከእውነተኛ ኢትዮጵያውያን ንግዶች የመጡ እውነተኛ ታሪኮች።',
+      am: 'ዲጂታል መገኘታቸውን ያመኑኝ ከእውነተኛ ኢትዮጵያውያን business-ዎች የመጡ እውነተኛ ታሪኮች።',
       or: "Seenaa dhugaa daldala Itoophiyaa dhugaa mul'achuu dijitaalaa isaanii natti amananirraa.",
       ti: 'ዲጂታል ምርኣዮም ዝኣመኑኒ ሓቀኛ ኢትዮጵያውያን ንግዳት ዝመጹ ሓቀኛ ዛንታታት።',
       so: 'Sheekooyin dhab ah oo ka yimid ganacsiyada Itoobiyaan ee dhab ah ee igu ammaanay joogitaankooda dhijitaalka.',
     },
     localTouch: {
       en: '// Customer feedback • Trusted by businesses across Ethiopia',
-      am: '// በደንበኞች የተሰጠ ግብረ-መልስ • በመላ ኢትዮጵያ በንግዶች የታመነ',
+      am: '// በደንበኞች የተሰጠ ግብረ-መልስ • በመላ ኢትዮጵያ በbusiness-ዎች የታመነ',
       or: "// Yaada maamiltootaa • Daldala Itoophiyaa guutuu biratti amaname",
       ti: '// ናይ ዓማዊል ርእይቶ • ኣብ መላእ ኢትዮጵያ ብንግዳት ዝተኣመነ',
       so: '// Jawaab-celinta macaamiisha • Ay ku kalsoonaadeen ganacsiyada Itoobiya oo dhan',
@@ -555,7 +555,7 @@ export const translations = {
     },
     description: {
       en: 'Ready to take your business online? Send me a message and let\'s discuss how I can help you reach more customers.',
-      am: 'ንግድዎን ኦንላይን ለማድረግ ዝግጁ ነዎት? መልእክት ይላኩልኝ እና ብዙ ደንበኞች እንዲደርሱ እንዴት ልረዳዎ እንደምችል እንወያይ።',
+      am: 'Business-ዎን ኦንላይን ለማድረግ ዝግጁ ነዎት? መልእክት ይላኩልኝ እና ብዙ ደንበኞች እንዲደርሱ እንዴት ልረዳዎ እንደምችል እንወያይ።',
       or: "Daldala keessan toora irra kaa'uuf qophii dha? Ergaa natti ergaa, maamiltootaa baay'ee bira ga'uuf akkamiin isin gargaaruu akkan danda'u haa mari'annu.",
       ti: 'ንግድኹም ኦንላይን ክትገብሩ ድሉዋት ዲኹም? መልእኽቲ ስደዱለይ እሞ ብዙሓት ዓማዊል ክትበጽሑ ብኸመይ ክሕግዘኩም ከምዝኽእል ንዘራረብ።',
       so: 'Ma diyaar u tahay inaad ganacsigaaga gasho onlayn? Ii soo dir fariin aan ka wada hadalno sida aan kugu caawin karo inaad gaarto macaamiil badan.',
@@ -598,7 +598,7 @@ export const translations = {
       },
       projectPlaceholder: {
         en: 'What kind of website do you need? Tell me about your business...',
-        am: 'ምን ዓይነት ድረ-ገጽ ያስፈልግዎታል? ስለ ንግድዎ ይንገሩኝ...',
+        am: 'ምን ዓይነት ድረ-ገጽ ያስፈልግዎታል? ስለ Business-ዎ ይንገሩኝ...',
         or: 'Weebsaayitii akkamii barbaaddu? Waa\'ee daldala keessanii natti himaa...',
         ti: 'ከመይ ዓይነት ወብሳይት የድልየኩም? ብዛዕባ ንግድኹም ንገሩኒ...',
         so: 'Nooc websaydh ah ma u baahan tahay? Ii sheeg ganacsigaaga...',
@@ -675,7 +675,7 @@ export const translations = {
   footer: {
     description: {
       en: 'Building premium web experiences for Ethiopian businesses. Transforming ideas into digital reality.',
-      am: 'ለኢትዮጵያውያን ንግዶች የላቀ የድረ-ገጽ ልምድ እገነባለሁ። ሃሳቦችን ወደ ዲጂታል እውነታ እቀይራለሁ።',
+      am: 'ለኢትዮጵያውያን business-ዎች የላቀ የድረ-ገጽ ልምድ እገነባለሁ። ሃሳቦችን ወደ ዲጂታል እውነታ እቀይራለሁ።',
       or: 'Muuxannoo weebsaayitii olaanaa daldala Itoophiyaatiif ijaara. Yaad-rimee gara dhugaa dijitaalaatti jijjiira.',
       ti: 'ንኢትዮጵያውያን ንግዳት ልዑል ወብ ተመኩሮ እሃንጽ። ሓሳባት ናብ ዲጂታል ሓቂ እቕይር።',
       so: 'Waxaan dhisaa khibrado websaydhka oo heer sare ah ganacsiyada Itoobiya. Fikradaha waxaan u beddelaa xaqiiq dhijitaal ah.',
@@ -736,14 +736,14 @@ export const translations = {
       },
       businessWebsite: {
         en: 'Business Website',
-        am: 'የንግድ ድረ-ገጽ ይገንቡ',
+        am: 'የBusiness ድረ-ገጽ ይገንቡ',
         or: 'Weebsaayitii Daldala Ijaari',
         ti: 'ናይ ንግዲ ወብሳይት ሃንጹ',
         so: 'Websaydhka Ganacsigaaga',
       },
       description: {
         en: "Answer a few questions about your business, and I'll prepare a custom solution for you.",
-        am: 'ስለ ንግድዎ ጥቂት ጥያቄዎችን ይመልሱ፣ እኔም ለእርስዎ ብጁ መፍትሄ አዘጋጃለሁ።',
+        am: 'ስለ Business-ዎ ጥቂት ጥያቄዎችን ይመልሱ፣ እኔም ለእርስዎ ብጁ መፍትሄ አዘጋጃለሁ።',
         or: "Waa'ee daldala keessanii gaaffilee muraasa deebisaa, furmaata addaa isiniif nan qopheessa.",
         ti: 'ብዛዕባ ንግድኹም ቁሩብ ሕቶታት መልሱ፣ ኣነ ድማ ንዓኹም ብሕታዊ ፍታሕ ኣዳሉ።',
         so: 'Ka jawaab su\'aalo yar oo ku saabsan ganacsigaaga, waxaan kuu diyaariyaa xal gaar ah.',
@@ -752,7 +752,7 @@ export const translations = {
     steps: {
       businessIdentity: {
         en: 'Business Identity',
-        am: 'የንግድ መታወቂያ',
+        am: 'የBusiness መታወቂያ',
         or: 'Eenyummaa Daldala',
         ti: 'መንነት ንግዲ',
         so: 'Aqoonsiga Ganacsiga',
@@ -796,14 +796,14 @@ export const translations = {
     fields: {
       businessName: {
         en: 'Business Name',
-        am: 'የንግድ ስም',
+        am: 'የBusiness ስም',
         or: 'Maqaa Daldala',
         ti: 'ሽም ንግዲ',
         so: 'Magaca Ganacsiga',
       },
       businessType: {
         en: 'Business Type',
-        am: 'የንግድ ዓይነት',
+        am: 'የBusiness ዓይነት',
         or: 'Gosa Daldala',
         ti: 'ዓይነት ንግዲ',
         so: 'Nooca Ganacsiga',
@@ -1075,7 +1075,7 @@ export const translations = {
         },
         competeModern: {
           en: 'Compete with modern businesses',
-          am: 'ከዘመናዊ ንግዶች ጋር ይወዳደሩ',
+          am: 'ከዘመናዊ business-ዎች ጋር ይወዳደሩ',
           or: 'Daldala ammayyaa waliin dorgomi',
           ti: 'ምስ ዘመናውያን ንግዳት ምውድዳር',
           so: 'La tartam ganacsiyada casriga ah',
@@ -1128,7 +1128,7 @@ export const translations = {
       options: {
         businessIntro: {
           en: 'Business introduction page',
-          am: 'የንግድ መግቢያ ገጽ',
+          am: 'የBusiness መግቢያ ገጽ',
           or: 'Fuula seensa daldala',
           ti: 'ናይ ንግዲ መእተዊ ገጽ',
           so: 'Bogga hordhaca ganacsiga',
@@ -1240,7 +1240,7 @@ export const translations = {
         },
         qrCode: {
           en: 'QR code for business',
-          am: 'ለንግድ QR ኮድ',
+          am: 'ለBusiness QR ኮድ',
           or: 'Koodii QR daldalatiif',
           ti: 'ንንግዲ QR ኮድ',
           so: 'Koodka QR ganacsiga',
@@ -1491,7 +1491,7 @@ export const translations = {
       },
       businessTypeOther: {
         en: 'Please specify your business type',
-        am: 'እባክዎ የንግድ ዓይነትዎን ይግለጹ',
+        am: 'እባክዎ የBusiness ዓይነትዎን ይግለጹ',
         or: 'Maaloo gosa daldala keessanii ibsaa',
         ti: 'በጃኹም ዓይነት ንግድኹም ግለጹ',
         so: 'Fadlan sheeg nooca ganacsigaaga',

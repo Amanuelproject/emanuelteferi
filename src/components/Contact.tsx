@@ -91,8 +91,8 @@ export function Contact() {
                   </div>
                 </a>
                 
-                <a
-                  href="https://wa.me/251962025394"
+              <a
+                  href="https://wa.me/251922363691"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 p-4 rounded-xl bg-green-500/10 border border-green-500/20 hover:bg-green-500/20 transition-colors"
@@ -107,7 +107,7 @@ export function Contact() {
                 </a>
                 
                 <a
-                  href="mailto:emanuelteferi@example.com"
+                  href="mailto:best@emanuelteferi.site"
                   className="flex items-center gap-4 p-4 rounded-xl bg-secondary/50 border border-border/50 hover:bg-secondary transition-colors"
                 >
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
@@ -115,7 +115,7 @@ export function Contact() {
                   </div>
                   <div>
                     <p className="font-medium text-foreground">{t('contact.form.email')}</p>
-                    <p className="text-sm text-muted-foreground">emanuelteferi@example.com</p>
+                    <p className="text-sm text-muted-foreground">best@emanuelteferi.site</p>
                   </div>
                 </a>
               </div>
