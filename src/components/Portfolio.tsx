@@ -12,7 +12,12 @@ import cherchisCafe4Img from '@/assets/portfolio/cherchis-cafe-4.png';
 import cherchisCafe5Img from '@/assets/portfolio/cherchis-cafe-5.png';
 import cherchisCafe6Img from '@/assets/portfolio/cherchis-cafe-6.png';
 import cherchisCafe7Img from '@/assets/portfolio/cherchis-cafe-7.png';
+import cherchisCafe8Img from '@/assets/portfolio/cherchis-cafe-8.png';
 import nuhasGardenImg from '@/assets/portfolio/nuhas-garden.png';
+import nuhasGarden2Img from '@/assets/portfolio/nuhas-garden-2.png';
+import nuhasGarden3Img from '@/assets/portfolio/nuhas-garden-3.png';
+import nuhasGarden4Img from '@/assets/portfolio/nuhas-garden-4.png';
+import nuhasGarden5Img from '@/assets/portfolio/nuhas-garden-5.png';
 import solinaCoffeeImg from '@/assets/portfolio/solina-coffee.png';
 import solinaCoffee2Img from '@/assets/portfolio/solina-coffee-2.png';
 import solinaCoffee3Img from '@/assets/portfolio/solina-coffee-3.png';
@@ -30,6 +35,11 @@ import blingDental2Img from '@/assets/portfolio/bling-dental-2.png';
 import blingDental3Img from '@/assets/portfolio/bling-dental-3.png';
 import blingDental4Img from '@/assets/portfolio/bling-dental-4.png';
 import rainbowDecorImg from '@/assets/portfolio/rainbow-decor.png';
+import rainbowDecor2Img from '@/assets/portfolio/rainbow-decor-2.png';
+import rainbowDecor3Img from '@/assets/portfolio/rainbow-decor-3.png';
+import rainbowDecor4Img from '@/assets/portfolio/rainbow-decor-4.png';
+import rainbowDecor5Img from '@/assets/portfolio/rainbow-decor-5.png';
+import rainbowDecor6Img from '@/assets/portfolio/rainbow-decor-6.png';
 import blackPotionImg from '@/assets/portfolio/black-potion.png';
 import blackPotion2Img from '@/assets/portfolio/black-potion-2.png';
 import blackPotion3Img from '@/assets/portfolio/black-potion-3.png';
@@ -59,7 +69,7 @@ const projects = [
     outcome: 'More weekday visitors; customers now find them via Google search',
     website: 'https://cherchiscafe1.lovable.app/',
     github: 'https://github.com/webniereagency/cherchiscafe1-d8b4ec2c',
-    images: [cherchisCafeImg, cherchisCafe2Img, cherchisCafe3Img, cherchisCafe4Img, cherchisCafe5Img, cherchisCafe6Img, cherchisCafe7Img],
+    images: [cherchisCafeImg, cherchisCafe2Img, cherchisCafe3Img, cherchisCafe4Img, cherchisCafe5Img, cherchisCafe6Img, cherchisCafe7Img, cherchisCafe8Img],
   },
   {
     name: "Nuha's Garden",
@@ -70,7 +80,7 @@ const projects = [
     outcome: 'More tour bookings, better-prepared inquiries from planners',
     website: 'https://nuhasgarden.lovable.app/',
     github: 'https://github.com/webniereagency/nuhasgarden',
-    images: [nuhasGardenImg],
+    images: [nuhasGardenImg, nuhasGarden2Img, nuhasGarden3Img, nuhasGarden4Img, nuhasGarden5Img],
   },
   {
     name: 'Solina Coffee',
@@ -114,7 +124,7 @@ const projects = [
     outcome: 'Faster client decisions, streamlined quotes',
     website: 'https://rainbow-decor-ethiopia.lovable.app/#home',
     github: 'https://github.com/webniereagency/webniereagencyspreload1',
-    images: [rainbowDecorImg],
+    images: [rainbowDecorImg, rainbowDecor2Img, rainbowDecor3Img, rainbowDecor4Img, rainbowDecor5Img, rainbowDecor6Img],
   },
   {
     name: 'Black Potion Sedona',
@@ -138,11 +148,40 @@ interface PortfolioImageSliderProps {
 
 function PortfolioImageSlider({ images, projectName, website, isInView }: PortfolioImageSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Preload all images when component mounts
   useEffect(() => {
-    // Only start sliding if in view and has multiple images
-    if (isInView && images.length > 1) {
+    if (images.length <= 1) {
+      setImagesLoaded(true);
+      return;
+    }
+
+    let loadedCount = 0;
+    const totalImages = images.length;
+
+    images.forEach((src) => {
+      const img = new Image();
+      img.onload = () => {
+        loadedCount++;
+        if (loadedCount === totalImages) {
+          setImagesLoaded(true);
+        }
+      };
+      img.onerror = () => {
+        loadedCount++;
+        if (loadedCount === totalImages) {
+          setImagesLoaded(true);
+        }
+      };
+      img.src = src;
+    });
+  }, [images]);
+
+  useEffect(() => {
+    // Only start sliding if in view, has multiple images, and images are preloaded
+    if (isInView && images.length > 1 && imagesLoaded) {
       intervalRef.current = setInterval(() => {
         setCurrentIndex((prev) => (prev + 1) % images.length);
       }, 3000); // 3 seconds between transitions
@@ -153,7 +192,7 @@ function PortfolioImageSlider({ images, projectName, website, isInView }: Portfo
         clearInterval(intervalRef.current);
       }
     };
-  }, [isInView, images.length]);
+  }, [isInView, images.length, imagesLoaded]);
 
   // Reset to first image when not in view
   useEffect(() => {
