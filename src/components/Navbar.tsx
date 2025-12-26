@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Globe } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import logo from '@/assets/logo.png';
@@ -13,6 +13,15 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showLangDropdown, setShowLangDropdown] = useState(false);
+  const [showHint, setShowHint] = useState(true);
+
+  // Hide the hint after 5 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowHint(false);
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const navLinks = [
     { href: '#home', labelKey: 'nav.home' },
@@ -95,13 +104,43 @@ export function Navbar() {
             <div className="flex items-center gap-4">
               {/* Language Switcher */}
               <div className="relative">
-                <button
-                  onClick={() => setShowLangDropdown(!showLangDropdown)}
-                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                <motion.button
+                  onClick={() => {
+                    setShowLangDropdown(!showLangDropdown);
+                    setShowHint(false);
+                  }}
+                  className="relative flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded-md"
+                  animate={showHint ? {
+                    boxShadow: [
+                      '0 0 0 0 hsl(var(--primary) / 0)',
+                      '0 0 0 4px hsl(var(--primary) / 0.3)',
+                      '0 0 0 0 hsl(var(--primary) / 0)'
+                    ]
+                  } : {}}
+                  transition={showHint ? {
+                    duration: 2,
+                    repeat: 2,
+                    ease: 'easeInOut'
+                  } : {}}
                 >
-                  <Globe className="w-4 h-4" />
+                  {/* Amharic indicator instead of globe */}
+                  <span className="text-sm font-medium text-primary">አም</span>
                   <span className="hidden sm:block">{languages.find(l => l.code === language)?.label}</span>
-                </button>
+                  
+                  {/* Subtle hint tooltip */}
+                  <AnimatePresence>
+                    {showHint && (
+                      <motion.span
+                        initial={{ opacity: 0, y: 5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -5 }}
+                        className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs text-primary bg-card px-2 py-1 rounded border border-border shadow-sm"
+                      >
+                        ቋንቋ ይቀይሩ
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </motion.button>
                 
                 <AnimatePresence>
                   {showLangDropdown && (
