@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowDown, Code2, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -11,6 +12,7 @@ const typingTexts = [
 ];
 
 export function Hero() {
+  const navigate = useNavigate();
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
@@ -150,7 +152,7 @@ export function Hero() {
             <Button variant="hero" size="xl" onClick={() => handleScroll('#portfolio')}>
               View My Work
             </Button>
-            <Button variant="heroOutline" size="xl" onClick={() => handleScroll('#contact')}>
+            <Button variant="heroOutline" size="xl" onClick={() => navigate('/start-project')}>
               Let's Get Started
             </Button>
           </motion.div>
