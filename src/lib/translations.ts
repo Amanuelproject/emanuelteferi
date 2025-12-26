@@ -617,6 +617,20 @@ export const translations = {
         ti: 'ሕጂ ደውሉ',
         so: 'Hadda Wac',
       },
+      quickContact: {
+        en: 'Quick Contact',
+        am: 'ፈጣን ግንኙነት',
+        or: 'Quunnamtii Ariifataa',
+        ti: 'ቅልጡፍ ርክብ',
+        so: 'Xiriir Degdeg ah',
+      },
+      chatOnWhatsApp: {
+        en: 'Chat with us instantly',
+        am: 'ወዲያውኑ ያውሩን',
+        or: 'Battaluma nutti dubbachuu',
+        ti: 'ብቕጽበት ተዛራረቡና',
+        so: 'Nala sheekeyso si degdeg ah',
+      },
     },
     payment: {
       title: {

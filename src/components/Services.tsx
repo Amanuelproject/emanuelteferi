@@ -98,20 +98,6 @@ export function Services() {
           ))}
         </div>
 
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-center mt-16"
-        >
-          <p className="text-muted-foreground mb-2">{t('services.startingAt')}</p>
-          <p className="text-4xl font-bold text-primary mb-4">10,000 ETB</p>
-          <p className="text-sm text-muted-foreground">
-            {t('services.priceNote')}
-          </p>
-        </motion.div>
       </div>
     </section>
   );

@@ -8,6 +8,8 @@ import { Services } from '@/components/Services';
 import { Portfolio } from '@/components/Portfolio';
 import { Contact } from '@/components/Contact';
 import { Footer } from '@/components/Footer';
+import { SectionCTA } from '@/components/SectionCTA';
+import { Gallery } from '@/components/Gallery';
 
 const Index = () => {
   const [showPreloader, setShowPreloader] = useState(true);
@@ -40,11 +42,17 @@ const Index = () => {
         <Navbar />
         <main>
           <Hero />
+          <SectionCTA />
           <About />
+          <SectionCTA />
           <Testimonials />
+          <SectionCTA />
           <Services />
+          <SectionCTA />
           <Portfolio />
+          <SectionCTA />
           <Contact />
+          <Gallery />
         </main>
         <Footer />
       </div>

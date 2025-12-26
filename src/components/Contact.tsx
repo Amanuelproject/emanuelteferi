@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Phone, Mail, MessageCircle, Copy, Check, MapPin } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Phone, Mail, MessageCircle, Copy, Check, MapPin } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -27,12 +26,6 @@ export function Contact() {
   const { toast } = useToast();
   const { t } = useLanguage();
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
-  });
 
   const copyToClipboard = (text: string, index: number) => {
     navigator.clipboard.writeText(text);
@@ -42,13 +35,6 @@ export function Contact() {
       description: t('contact.payment.copiedDesc'),
     });
     setTimeout(() => setCopiedIndex(null), 2000);
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Open WhatsApp with pre-filled message
-    const message = `Hi Emanuel! I'm ${formData.name}.%0A%0A${formData.message}%0A%0AContact: ${formData.email || formData.phone}`;
-    window.open(`https://wa.me/251962025394?text=${message}`, '_blank');
   };
 
   return (
@@ -77,100 +63,62 @@ export function Contact() {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
+          {/* Quick Contact Options */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="space-y-6"
           >
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  {t('contact.form.yourName')}
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl bg-card border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-foreground placeholder:text-muted-foreground"
-                  placeholder={t('contact.form.enterName')}
-                />
+            <div className="p-6 rounded-2xl bg-card border border-border/50">
+              <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-primary" />
+                {t('contact.form.quickContact')}
+              </h3>
+              
+              <div className="space-y-4">
+                <a
+                  href="tel:+251962025394"
+                  className="flex items-center gap-4 p-4 rounded-xl bg-secondary/50 border border-border/50 hover:bg-secondary transition-colors"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Phone className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-foreground">{t('contact.form.callNow')}</p>
+                    <p className="text-sm text-muted-foreground">+251 962 025 394</p>
+                  </div>
+                </a>
+                
+                <a
+                  href="https://wa.me/251962025394"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 p-4 rounded-xl bg-green-500/10 border border-green-500/20 hover:bg-green-500/20 transition-colors"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center">
+                    <MessageCircle className="w-5 h-5 text-green-400" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-foreground">WhatsApp</p>
+                    <p className="text-sm text-muted-foreground">{t('contact.form.chatOnWhatsApp')}</p>
+                  </div>
+                </a>
+                
+                <a
+                  href="mailto:emanuelteferi@example.com"
+                  className="flex items-center gap-4 p-4 rounded-xl bg-secondary/50 border border-border/50 hover:bg-secondary transition-colors"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Mail className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-foreground">{t('contact.form.email')}</p>
+                    <p className="text-sm text-muted-foreground">emanuelteferi@example.com</p>
+                  </div>
+                </a>
               </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    {t('contact.form.email')}
-                  </label>
-                  <input
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-card border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-foreground placeholder:text-muted-foreground"
-                    placeholder="your@email.com"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    {t('contact.form.phone')}
-                  </label>
-                  <input
-                    type="tel"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-card border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-foreground placeholder:text-muted-foreground"
-                    placeholder="+251 9XX XXX XXX"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  {t('contact.form.tellAboutProject')}
-                </label>
-                <textarea
-                  required
-                  rows={4}
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl bg-card border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-foreground placeholder:text-muted-foreground resize-none"
-                  placeholder={t('contact.form.projectPlaceholder')}
-                />
-              </div>
-
-              <Button type="submit" variant="hero" size="lg" className="w-full">
-                <Send className="w-4 h-4 mr-2" />
-                {t('contact.form.sendViaWhatsApp')}
-              </Button>
-            </form>
-
-            {/* Quick contact */}
-            <div className="mt-8 flex flex-wrap gap-4">
-              <a
-                href="tel:+251962025394"
-                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
-              >
-                <Phone className="w-4 h-4" />
-                <span className="text-sm">{t('contact.form.callNow')}</span>
-              </a>
-              <a
-                href="https://wa.me/251962025394"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-green-500/10 text-green-400 hover:bg-green-500/20 transition-colors"
-              >
-                <MessageCircle className="w-4 h-4" />
-                <span className="text-sm">WhatsApp</span>
-              </a>
-              <a
-                href="mailto:emanuelteferi@example.com"
-                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
-              >
-                <Mail className="w-4 h-4" />
-                <span className="text-sm">{t('contact.form.email')}</span>
-              </a>
             </div>
           </motion.div>
 
