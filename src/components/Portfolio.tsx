@@ -14,11 +14,19 @@ import cherchisCafe6Img from '@/assets/portfolio/cherchis-cafe-6.png';
 import cherchisCafe7Img from '@/assets/portfolio/cherchis-cafe-7.png';
 import nuhasGardenImg from '@/assets/portfolio/nuhas-garden.png';
 import solinaCoffeeImg from '@/assets/portfolio/solina-coffee.png';
+import solinaCoffee2Img from '@/assets/portfolio/solina-coffee-2.png';
+import solinaCoffee3Img from '@/assets/portfolio/solina-coffee-3.png';
+import solinaCoffee4Img from '@/assets/portfolio/solina-coffee-4.png';
+import solinaCoffee5Img from '@/assets/portfolio/solina-coffee-5.png';
+import solinaCoffee6Img from '@/assets/portfolio/solina-coffee-6.png';
 import duskAddisImg from '@/assets/portfolio/dusk-addis.png';
 import blingDentalImg from '@/assets/portfolio/bling-dental.png';
 import rainbowDecorImg from '@/assets/portfolio/rainbow-decor.png';
 import blackPotionImg from '@/assets/portfolio/black-potion.png';
 import momensSalonImg from '@/assets/portfolio/momens-salon.png';
+import momensSalon2Img from '@/assets/portfolio/momens-salon-2.png';
+import momensSalon3Img from '@/assets/portfolio/momens-salon-3.png';
+import momensSalon4Img from '@/assets/portfolio/momens-salon-4.png';
 
 const projects = [
   {
@@ -30,7 +38,7 @@ const projects = [
     outcome: 'Increase in quality walk-ins and WhatsApp inquiries; customers trust clear pricing',
     website: 'https://momenssalon.lovable.app/#',
     github: 'https://github.com/webniereagency/momenssalon-39538efe',
-    images: [momensSalonImg],
+    images: [momensSalonImg, momensSalon2Img, momensSalon3Img, momensSalon4Img],
   },
   {
     name: 'Cherchis Café',
@@ -63,7 +71,7 @@ const projects = [
     outcome: 'Customers decide drinks before coming; fewer calls asking basic questions',
     website: 'https://solinacoffe.lovable.app/',
     github: 'https://github.com/webniereagency/solinacoffe',
-    images: [solinaCoffeeImg],
+    images: [solinaCoffeeImg, solinaCoffee2Img, solinaCoffee3Img, solinaCoffee4Img, solinaCoffee5Img, solinaCoffee6Img],
   },
   {
     name: 'Dusk Addis',
@@ -157,6 +165,8 @@ function PortfolioImageSlider({ images, projectName, website, isInView }: Portfo
             key={currentIndex}
             src={images[currentIndex]}
             alt={`${projectName} website screenshot`}
+            loading="lazy"
+            decoding="async"
             className="absolute inset-0 w-full h-full object-cover object-top"
             initial={{ opacity: 0, scale: 1.05 }}
             animate={{ opacity: 1, scale: 1 }}
