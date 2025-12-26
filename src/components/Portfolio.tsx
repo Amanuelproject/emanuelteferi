@@ -20,9 +20,19 @@ import solinaCoffee4Img from '@/assets/portfolio/solina-coffee-4.png';
 import solinaCoffee5Img from '@/assets/portfolio/solina-coffee-5.png';
 import solinaCoffee6Img from '@/assets/portfolio/solina-coffee-6.png';
 import duskAddisImg from '@/assets/portfolio/dusk-addis.png';
+import duskAddis2Img from '@/assets/portfolio/dusk-addis-2.png';
+import duskAddis3Img from '@/assets/portfolio/dusk-addis-3.png';
+import duskAddis4Img from '@/assets/portfolio/dusk-addis-4.png';
+import duskAddis5Img from '@/assets/portfolio/dusk-addis-5.png';
+import duskAddis6Img from '@/assets/portfolio/dusk-addis-6.png';
 import blingDentalImg from '@/assets/portfolio/bling-dental.png';
+import blingDental2Img from '@/assets/portfolio/bling-dental-2.png';
+import blingDental3Img from '@/assets/portfolio/bling-dental-3.png';
+import blingDental4Img from '@/assets/portfolio/bling-dental-4.png';
 import rainbowDecorImg from '@/assets/portfolio/rainbow-decor.png';
 import blackPotionImg from '@/assets/portfolio/black-potion.png';
+import blackPotion2Img from '@/assets/portfolio/black-potion-2.png';
+import blackPotion3Img from '@/assets/portfolio/black-potion-3.png';
 import momensSalonImg from '@/assets/portfolio/momens-salon.png';
 import momensSalon2Img from '@/assets/portfolio/momens-salon-2.png';
 import momensSalon3Img from '@/assets/portfolio/momens-salon-3.png';
@@ -82,7 +92,7 @@ const projects = [
     outcome: 'More table reservations, fewer repeated inquiries',
     website: 'https://duskaddis.lovable.app/',
     github: 'https://github.com/webniereagency/duskaddis',
-    images: [duskAddisImg],
+    images: [duskAddisImg, duskAddis2Img, duskAddis3Img, duskAddis4Img, duskAddis5Img, duskAddis6Img],
   },
   {
     name: 'Bling Dental Clinic',
@@ -93,7 +103,7 @@ const projects = [
     outcome: 'Patients book online directly; clinic feels more professional',
     website: 'https://blingdental.lovable.app/',
     github: 'https://github.com/webniereagency/blingdental',
-    images: [blingDentalImg],
+    images: [blingDentalImg, blingDental2Img, blingDental3Img, blingDental4Img],
   },
   {
     name: 'Rainbow Decor Ethiopia',
@@ -114,8 +124,8 @@ const projects = [
     solution: 'Full brand experience with menu, services, gallery',
     outcome: 'International project showcasing versatility',
     website: 'https://blackpotionsedona.github.io/new/#/',
-    github: null,
-    images: [blackPotionImg],
+    github: 'https://github.com/webniereagency/blackpotionsedona',
+    images: [blackPotionImg, blackPotion2Img, blackPotion3Img],
   },
 ];
 
