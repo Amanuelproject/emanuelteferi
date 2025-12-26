@@ -175,7 +175,7 @@ export function Testimonials() {
                 onClick={() => setActiveIndex(index)}
                 drag={isActive ? "x" : false}
                 dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={0.2}
+                dragElastic={0.15}
                 onDragEnd={isActive ? handleDragEnd : undefined}
                 animate={{
                   scale,
@@ -184,9 +184,10 @@ export function Testimonials() {
                   filter: `blur(${blur}px)`,
                 }}
                 transition={{
-                  type: 'tween',
-                  duration: 0.6,
-                  ease: [0.4, 0, 0.2, 1],
+                  type: 'spring',
+                  stiffness: 300,
+                  damping: 30,
+                  mass: 1,
                 }}
                 className={`absolute inset-x-0 mx-auto ${isActive ? 'cursor-grab active:cursor-grabbing' : 'cursor-pointer'}`}
                 style={{ zIndex }}

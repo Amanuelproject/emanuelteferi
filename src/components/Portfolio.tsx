@@ -224,7 +224,7 @@ function PortfolioImageSlider({ images, projectName, website, isInView }: Portfo
 
   const slideVariants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? 100 : -100,
+      x: direction > 0 ? 30 : -30,
       opacity: 0,
     }),
     center: {
@@ -232,7 +232,7 @@ function PortfolioImageSlider({ images, projectName, website, isInView }: Portfo
       opacity: 1,
     },
     exit: (direction: number) => ({
-      x: direction < 0 ? 100 : -100,
+      x: direction < 0 ? 30 : -30,
       opacity: 0,
     }),
   };
@@ -240,7 +240,7 @@ function PortfolioImageSlider({ images, projectName, website, isInView }: Portfo
   return (
     <div className="block border-t border-border/50 overflow-hidden">
       <div className="relative group/image h-48 overflow-hidden touch-pan-y">
-        <AnimatePresence initial={false} custom={direction} mode="wait">
+        <AnimatePresence initial={false} custom={direction} mode="popLayout">
           <motion.a
             key={currentIndex}
             href={website}
@@ -251,10 +251,15 @@ function PortfolioImageSlider({ images, projectName, website, isInView }: Portfo
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ duration: 0.4, ease: 'easeInOut' }}
+            transition={{ 
+              type: 'spring',
+              stiffness: 300,
+              damping: 30,
+              mass: 0.8,
+            }}
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.2}
+            dragElastic={0.15}
             onDragEnd={handleDragEnd}
             className="absolute inset-0 cursor-grab active:cursor-grabbing"
           >
@@ -274,24 +279,24 @@ function PortfolioImageSlider({ images, projectName, website, isInView }: Portfo
           </span>
         </div>
         
-        {/* Swipe indicators for mobile */}
+        {/* Swipe indicators - always visible */}
         {images.length > 1 && (
           <>
             {/* Left arrow indicator */}
             <button
               onClick={(e) => { e.preventDefault(); goToPrev(); }}
-              className="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-background/80 p-1.5 rounded-full opacity-0 group-hover/image:opacity-100 md:opacity-100 transition-opacity duration-300"
+              className="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-background/90 border border-border/50 p-2 rounded-full shadow-lg hover:bg-background transition-all duration-300"
               aria-label="Previous image"
             >
-              <ChevronLeft className="w-4 h-4 text-foreground" />
+              <ChevronLeft className="w-5 h-5 text-foreground" />
             </button>
             {/* Right arrow indicator */}
             <button
               onClick={(e) => { e.preventDefault(); goToNext(); }}
-              className="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-background/80 p-1.5 rounded-full opacity-0 group-hover/image:opacity-100 md:opacity-100 transition-opacity duration-300"
+              className="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-background/90 border border-border/50 p-2 rounded-full shadow-lg hover:bg-background transition-all duration-300"
               aria-label="Next image"
             >
-              <ChevronRight className="w-4 h-4 text-foreground" />
+              <ChevronRight className="w-5 h-5 text-foreground" />
             </button>
           </>
         )}
