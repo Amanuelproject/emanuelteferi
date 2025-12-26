@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
-import { Quote, Star } from 'lucide-react';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { motion, PanInfo } from 'framer-motion';
+import { Quote, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const testimonials = [
@@ -52,16 +52,24 @@ export function Testimonials() {
   const [isInView, setIsInView] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
+  const goToNext = useCallback(() => {
+    setActiveIndex((prev) => (prev + 1) % testimonials.length);
+  }, []);
+
+  const goToPrev = useCallback(() => {
+    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  }, []);
+
   // Auto-cycle when section is in view
   useEffect(() => {
     if (!isInView) return;
 
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % testimonials.length);
+      goToNext();
     }, 5000); // 5 seconds between transitions
 
     return () => clearInterval(interval);
-  }, [isInView]);
+  }, [isInView, goToNext]);
 
   // Intersection observer to detect when section is visible
   useEffect(() => {
@@ -78,6 +86,16 @@ export function Testimonials() {
     observer.observe(section);
     return () => observer.disconnect();
   }, []);
+
+  // Handle swipe gestures
+  const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+    const swipeThreshold = 50;
+    if (info.offset.x < -swipeThreshold) {
+      goToNext();
+    } else if (info.offset.x > swipeThreshold) {
+      goToPrev();
+    }
+  };
 
   return (
     <section ref={sectionRef} id="testimonials" className="py-24 relative overflow-hidden">
@@ -112,8 +130,24 @@ export function Testimonials() {
           </p>
         </motion.div>
 
-        {/* Stacked Cards */}
+        {/* Stacked Cards with swipe support */}
         <div className="relative max-w-4xl mx-auto h-[420px] md:h-[380px]">
+          {/* Swipe arrows for navigation */}
+          <button
+            onClick={goToPrev}
+            className="absolute -left-2 md:-left-12 top-1/2 -translate-y-1/2 z-20 bg-card/80 border border-border/50 p-2 md:p-3 rounded-full shadow-lg hover:bg-card transition-colors"
+            aria-label="Previous testimonial"
+          >
+            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
+          </button>
+          <button
+            onClick={goToNext}
+            className="absolute -right-2 md:-right-12 top-1/2 -translate-y-1/2 z-20 bg-card/80 border border-border/50 p-2 md:p-3 rounded-full shadow-lg hover:bg-card transition-colors"
+            aria-label="Next testimonial"
+          >
+            <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
+          </button>
+
           {testimonials.map((testimonial, index) => {
             const offset = index - activeIndex;
             // Handle wrapping for circular navigation
@@ -139,6 +173,10 @@ export function Testimonials() {
               <motion.div
                 key={testimonial.id}
                 onClick={() => setActiveIndex(index)}
+                drag={isActive ? "x" : false}
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.2}
+                onDragEnd={isActive ? handleDragEnd : undefined}
                 animate={{
                   scale,
                   y: translateY,
@@ -150,7 +188,7 @@ export function Testimonials() {
                   duration: 0.6,
                   ease: [0.4, 0, 0.2, 1],
                 }}
-                className="absolute inset-x-0 mx-auto cursor-pointer"
+                className={`absolute inset-x-0 mx-auto ${isActive ? 'cursor-grab active:cursor-grabbing' : 'cursor-pointer'}`}
                 style={{ zIndex }}
               >
                 <div
@@ -194,6 +232,16 @@ export function Testimonials() {
             );
           })}
         </div>
+
+        {/* Swipe hint for mobile */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+          className="text-center text-xs text-muted-foreground mt-4 md:hidden"
+        >
+          ← Swipe to navigate →
+        </motion.p>
 
         {/* Navigation dots */}
         <div className="flex justify-center gap-2 mt-8">
