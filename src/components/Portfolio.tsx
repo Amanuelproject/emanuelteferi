@@ -119,6 +119,31 @@ export function Portfolio() {
         backgroundPosition: '0 0, 0 10px, 10px -10px, -10px 0px',
       }} />
 
+      {/* Animated rain particles - like preloader */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(25)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-0.5 h-3 rounded-full bg-primary/20"
+            initial={{
+              x: `${Math.random() * 100}%`,
+              y: -20,
+              opacity: 0,
+            }}
+            animate={{
+              y: '100vh',
+              opacity: [0, 0.5, 0.5, 0],
+            }}
+            transition={{
+              duration: 4 + Math.random() * 3,
+              repeat: Infinity,
+              delay: Math.random() * 3,
+              ease: 'linear',
+            }}
+          />
+        ))}
+      </div>
+
       <div className="container mx-auto px-4 relative z-10">
         {/* Section header */}
         <motion.div
