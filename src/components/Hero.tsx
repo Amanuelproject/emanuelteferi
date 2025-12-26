@@ -29,12 +29,15 @@ export function Hero() {
   useEffect(() => {
     const currentFullText = typingTexts[currentTextIndex];
     
+    const typingSpeed = isDeleting ? 40 : 80; // Smoother, slightly faster typing
+    const pauseAfterComplete = 2500; // Longer pause before deleting
+    
     const timeout = setTimeout(() => {
       if (!isDeleting) {
         if (displayText.length < currentFullText.length) {
           setDisplayText(currentFullText.slice(0, displayText.length + 1));
         } else {
-          setTimeout(() => setIsDeleting(true), 2000);
+          setTimeout(() => setIsDeleting(true), pauseAfterComplete);
         }
       } else {
         if (displayText.length > 0) {
@@ -44,7 +47,7 @@ export function Hero() {
           setCurrentTextIndex((prev) => (prev + 1) % typingTexts.length);
         }
       }
-    }, isDeleting ? 50 : 100);
+    }, typingSpeed);
 
     return () => clearTimeout(timeout);
   }, [displayText, isDeleting, currentTextIndex, typingTexts]);

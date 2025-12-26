@@ -80,7 +80,11 @@ export function Navbar() {
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
             <a href="#home" className="flex items-center gap-3">
-              <img src={logo} alt="Emanuel Teferi" className="w-10 h-10 object-contain" />
+              <div className="relative">
+                <div className="absolute inset-0 rounded-full border-2 border-primary/60 animate-pulse" style={{ margin: '-4px', padding: '4px' }} />
+                <div className="absolute inset-0 rounded-full bg-primary/10" style={{ margin: '-2px', padding: '2px' }} />
+                <img src={logo} alt="Emanuel Teferi" className="w-10 h-10 object-contain relative z-10" />
+              </div>
               <span className="font-semibold text-foreground hidden sm:block">
                 Emanuel<span className="text-primary">.</span>
               </span>
