@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowDown, Code2, Sparkles } from 'lucide-react';
+import { Code2, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const typingTexts = [
@@ -180,20 +180,6 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.button
-        onClick={() => handleScroll('#about')}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, 10, 0] }}
-        transition={{ 
-          opacity: { delay: 1 },
-          y: { duration: 2, repeat: Infinity }
-        }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
-      >
-        <span className="text-xs uppercase tracking-widest">Scroll</span>
-        <ArrowDown className="w-4 h-4" />
-      </motion.button>
     </section>
   );
 }

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 import { Quote, Star } from 'lucide-react';
 
 const testimonials = [
@@ -47,9 +47,38 @@ const testimonials = [
 
 export function Testimonials() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isInView, setIsInView] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Auto-cycle when section is in view
+  useEffect(() => {
+    if (!isInView) return;
+
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % testimonials.length);
+    }, 5000); // 5 seconds between transitions
+
+    return () => clearInterval(interval);
+  }, [isInView]);
+
+  // Intersection observer to detect when section is visible
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting && entry.intersectionRatio > 0.3);
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section id="testimonials" className="py-24 relative overflow-hidden">
+    <section ref={sectionRef} id="testimonials" className="py-24 relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-card/20 to-background" />
       
@@ -84,43 +113,49 @@ export function Testimonials() {
         {/* Stacked Cards */}
         <div className="relative max-w-4xl mx-auto h-[420px] md:h-[380px]">
           {testimonials.map((testimonial, index) => {
-            const isActive = index === activeIndex;
             const offset = index - activeIndex;
+            // Handle wrapping for circular navigation
+            const wrappedOffset = offset > testimonials.length / 2 
+              ? offset - testimonials.length 
+              : offset < -testimonials.length / 2 
+                ? offset + testimonials.length 
+                : offset;
             
-            // Calculate position for stacked effect
-            const zIndex = testimonials.length - Math.abs(offset);
-            const scale = 1 - Math.abs(offset) * 0.05;
-            const translateY = offset * 20;
-            const opacity = Math.abs(offset) > 2 ? 0 : 1 - Math.abs(offset) * 0.3;
-            const rotateZ = offset * 2;
+            const isActive = wrappedOffset === 0;
+            const isVisible = Math.abs(wrappedOffset) <= 2;
+            
+            // Calculate visual properties for stacked depth effect
+            const zIndex = 10 - Math.abs(wrappedOffset);
+            const scale = 1 - Math.abs(wrappedOffset) * 0.04;
+            const translateY = wrappedOffset * 16;
+            const opacity = isVisible ? 1 - Math.abs(wrappedOffset) * 0.25 : 0;
+            const blur = Math.abs(wrappedOffset) * 1.5;
+
+            if (!isVisible) return null;
 
             return (
               <motion.div
                 key={testimonial.id}
                 onClick={() => setActiveIndex(index)}
-                initial={false}
                 animate={{
                   scale,
                   y: translateY,
                   opacity,
-                  rotateZ,
-                  zIndex,
+                  filter: `blur(${blur}px)`,
                 }}
                 transition={{
-                  type: 'spring',
-                  stiffness: 300,
-                  damping: 30,
+                  type: 'tween',
+                  duration: 0.6,
+                  ease: [0.4, 0, 0.2, 1],
                 }}
-                className={`absolute inset-x-0 mx-auto cursor-pointer ${
-                  isActive ? 'pointer-events-auto' : 'pointer-events-auto'
-                }`}
+                className="absolute inset-x-0 mx-auto cursor-pointer"
                 style={{ zIndex }}
               >
                 <div
-                  className={`bg-card border rounded-2xl p-6 md:p-8 shadow-2xl transition-all duration-300 ${
+                  className={`bg-card border rounded-2xl p-6 md:p-8 shadow-2xl transition-colors duration-500 ${
                     isActive
-                      ? 'border-primary/50 shadow-primary/10'
-                      : 'border-border/50 hover:border-primary/30'
+                      ? 'border-primary/40 shadow-primary/10'
+                      : 'border-border/30'
                   }`}
                 >
                   {/* Quote icon */}
@@ -164,10 +199,10 @@ export function Testimonials() {
             <button
               key={index}
               onClick={() => setActiveIndex(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              className={`h-2 rounded-full transition-all duration-500 ${
                 index === activeIndex
-                  ? 'bg-primary w-8'
-                  : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
+                  ? 'bg-primary w-6'
+                  : 'bg-muted-foreground/20 w-2 hover:bg-muted-foreground/40'
               }`}
               aria-label={`View testimonial ${index + 1}`}
             />
