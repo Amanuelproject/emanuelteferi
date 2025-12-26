@@ -18,8 +18,9 @@ export function Footer() {
   ];
 
   const handleNavClick = (href: string) => {
-    // If we're not on the home page, navigate there first then scroll
-    if (location.pathname !== '/') {
+    // If we're on the start-project page, navigate home first then scroll
+    // With HashRouter, we check the hash instead of pathname
+    if (location.hash === '#/start-project') {
       navigate('/');
       setTimeout(() => {
         const element = document.querySelector(href);

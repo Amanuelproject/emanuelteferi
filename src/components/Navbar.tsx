@@ -49,8 +49,11 @@ export function Navbar() {
     }
     
     // If we're not on the home page, navigate there first then scroll
-    if (location.pathname !== '/') {
+    // With HashRouter, location.pathname is always '/' so we check the hash
+    const isHomePage = location.pathname === '/' && (!location.hash || location.hash === '#/' || location.hash.startsWith('#home') || location.hash.startsWith('#about') || location.hash.startsWith('#services') || location.hash.startsWith('#portfolio') || location.hash.startsWith('#contact'));
+    if (location.hash === '#/start-project') {
       navigate('/');
+      // Wait for navigation then scroll
       // Wait for navigation then scroll
       setTimeout(() => {
         const element = document.querySelector(href);
