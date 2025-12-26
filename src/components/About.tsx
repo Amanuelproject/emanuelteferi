@@ -66,21 +66,21 @@ export function About() {
 
             <div className="space-y-4 text-muted-foreground">
               <p>
-                I started coding as a teenager with one belief: every Ethiopian business 
-                deserves a professional online presence. At 18, I've already helped cafés, 
-                salons, clinics, and event venues connect with their customers through 
-                modern, beautiful websites.
+                I first touched code at ten — not because anyone pushed me to, but because 
+                I wanted to understand how things worked. That curiosity stayed with me 
+                through school, through everything. Now at 18, I build websites for 
+                Ethiopian businesses ready to be seen.
               </p>
               <p>
-                In Addis Ababa, customers increasingly search online before visiting 
-                a business. Without a website, you're invisible to them. I bridge that gap 
-                with solutions that are practical, affordable, and designed specifically 
-                for how Ethiopian businesses operate.
+                At some point, I had to decide what really mattered. I chose this path — 
+                creating solutions that help people grow. In Addis Ababa, a professional 
+                website isn't a luxury anymore. It's how trust begins before the first 
+                conversation even happens.
               </p>
               <p>
-                My approach is simple: understand your business, build what you actually need, 
-                and deliver something you're proud to share. No complicated tech jargon, 
-                no features you won't use — just results.
+                My approach is straightforward: listen carefully, build precisely, deliver 
+                reliably. No unnecessary complexity, no features you won't use. Every project 
+                is part of something I'm building — a foundation, one client at a time.
               </p>
             </div>
 
