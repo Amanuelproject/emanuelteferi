@@ -148,7 +148,7 @@ export function Portfolio() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative rounded-2xl bg-card border border-border/50 overflow-hidden hover:border-primary/30 transition-all duration-500"
+              className="group relative rounded-2xl bg-card border border-primary/20 overflow-hidden hover:border-primary/50 transition-all duration-500"
             >
               {/* Content */}
               <div className="p-6">

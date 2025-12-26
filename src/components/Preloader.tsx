@@ -34,12 +34,12 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
     // Start fade out after animations
     const fadeTimer = setTimeout(() => {
       setFadeOut(true);
-    }, 5000);
+    }, 8000);
 
     // Complete after fade
     const completeTimer = setTimeout(() => {
       onComplete();
-    }, 5800);
+    }, 9000);
 
     return () => {
       clearInterval(lineInterval);

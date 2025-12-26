@@ -24,7 +24,7 @@ export function SectionCTA({ className = '' }: SectionCTAProps) {
           onClick={() => navigate('/start-project')}
           className="group flex items-center gap-2 px-6 py-3 rounded-full bg-primary/10 border border-primary/20 text-primary hover:bg-primary/20 transition-colors duration-300"
         >
-          <span className="text-sm font-medium">{t('hero.cta.getStarted')}</span>
+          <span className="text-sm font-medium">Get Started</span>
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
         </button>
       </motion.div>
