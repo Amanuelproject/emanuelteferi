@@ -1,10 +1,17 @@
-import { motion } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Github } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 // Import portfolio images
 import cherchisCafeImg from '@/assets/portfolio/cherchis-cafe.png';
+import cherchisCafe2Img from '@/assets/portfolio/cherchis-cafe-2.png';
+import cherchisCafe3Img from '@/assets/portfolio/cherchis-cafe-3.png';
+import cherchisCafe4Img from '@/assets/portfolio/cherchis-cafe-4.png';
+import cherchisCafe5Img from '@/assets/portfolio/cherchis-cafe-5.png';
+import cherchisCafe6Img from '@/assets/portfolio/cherchis-cafe-6.png';
+import cherchisCafe7Img from '@/assets/portfolio/cherchis-cafe-7.png';
 import nuhasGardenImg from '@/assets/portfolio/nuhas-garden.png';
 import solinaCoffeeImg from '@/assets/portfolio/solina-coffee.png';
 import duskAddisImg from '@/assets/portfolio/dusk-addis.png';
@@ -23,7 +30,7 @@ const projects = [
     outcome: 'Increase in quality walk-ins and WhatsApp inquiries; customers trust clear pricing',
     website: 'https://momenssalon.lovable.app/#',
     github: 'https://github.com/webniereagency/momenssalon-39538efe',
-    image: momensSalonImg,
+    images: [momensSalonImg],
   },
   {
     name: 'Cherchis Café',
@@ -34,7 +41,7 @@ const projects = [
     outcome: 'More weekday visitors; customers now find them via Google search',
     website: 'https://cherchiscafe1.lovable.app/',
     github: 'https://github.com/webniereagency/cherchiscafe1-d8b4ec2c',
-    image: cherchisCafeImg,
+    images: [cherchisCafeImg, cherchisCafe2Img, cherchisCafe3Img, cherchisCafe4Img, cherchisCafe5Img, cherchisCafe6Img, cherchisCafe7Img],
   },
   {
     name: "Nuha's Garden",
@@ -45,7 +52,7 @@ const projects = [
     outcome: 'More tour bookings, better-prepared inquiries from planners',
     website: 'https://nuhasgarden.lovable.app/',
     github: 'https://github.com/webniereagency/nuhasgarden',
-    image: nuhasGardenImg,
+    images: [nuhasGardenImg],
   },
   {
     name: 'Solina Coffee',
@@ -56,7 +63,7 @@ const projects = [
     outcome: 'Customers decide drinks before coming; fewer calls asking basic questions',
     website: 'https://solinacoffe.lovable.app/',
     github: 'https://github.com/webniereagency/solinacoffe',
-    image: solinaCoffeeImg,
+    images: [solinaCoffeeImg],
   },
   {
     name: 'Dusk Addis',
@@ -67,7 +74,7 @@ const projects = [
     outcome: 'More table reservations, fewer repeated inquiries',
     website: 'https://duskaddis.lovable.app/',
     github: 'https://github.com/webniereagency/duskaddis',
-    image: duskAddisImg,
+    images: [duskAddisImg],
   },
   {
     name: 'Bling Dental Clinic',
@@ -78,7 +85,7 @@ const projects = [
     outcome: 'Patients book online directly; clinic feels more professional',
     website: 'https://blingdental.lovable.app/',
     github: 'https://github.com/webniereagency/blingdental',
-    image: blingDentalImg,
+    images: [blingDentalImg],
   },
   {
     name: 'Rainbow Decor Ethiopia',
@@ -89,7 +96,7 @@ const projects = [
     outcome: 'Faster client decisions, streamlined quotes',
     website: 'https://rainbow-decor-ethiopia.lovable.app/#home',
     github: 'https://github.com/webniereagency/webniereagencyspreload1',
-    image: rainbowDecorImg,
+    images: [rainbowDecorImg],
   },
   {
     name: 'Black Potion Sedona',
@@ -100,15 +107,109 @@ const projects = [
     outcome: 'International project showcasing versatility',
     website: 'https://blackpotionsedona.github.io/new/#/',
     github: null,
-    image: blackPotionImg,
+    images: [blackPotionImg],
   },
 ];
 
-export function Portfolio() {
-  const { t } = useLanguage();
+interface PortfolioImageSliderProps {
+  images: string[];
+  projectName: string;
+  website: string;
+  isInView: boolean;
+}
+
+function PortfolioImageSlider({ images, projectName, website, isInView }: PortfolioImageSliderProps) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    // Only start sliding if in view and has multiple images
+    if (isInView && images.length > 1) {
+      intervalRef.current = setInterval(() => {
+        setCurrentIndex((prev) => (prev + 1) % images.length);
+      }, 3000); // 3 seconds between transitions
+    }
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [isInView, images.length]);
+
+  // Reset to first image when not in view
+  useEffect(() => {
+    if (!isInView) {
+      setCurrentIndex(0);
+    }
+  }, [isInView]);
 
   return (
-    <section id="portfolio" className="py-24 relative overflow-hidden bg-card/30">
+    <a 
+      href={website} 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className="block border-t border-border/50 overflow-hidden"
+    >
+      <div className="relative group/image h-48 overflow-hidden">
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={currentIndex}
+            src={images[currentIndex]}
+            alt={`${projectName} website screenshot`}
+            className="absolute inset-0 w-full h-full object-cover object-top"
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.7, ease: 'easeInOut' }}
+          />
+        </AnimatePresence>
+        <div className="absolute inset-0 bg-primary/0 group-hover/image:bg-primary/10 transition-colors duration-300 flex items-center justify-center z-10">
+          <span className="opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 bg-background/90 px-4 py-2 rounded-lg text-sm font-medium text-foreground">
+            View Live Site
+          </span>
+        </div>
+        
+        {/* Slide indicators */}
+        {images.length > 1 && (
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+            {images.map((_, idx) => (
+              <div
+                key={idx}
+                className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                  idx === currentIndex ? 'bg-primary w-4' : 'bg-foreground/30'
+                }`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </a>
+  );
+}
+
+export function Portfolio() {
+  const { t } = useLanguage();
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isInView, setIsInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section id="portfolio" ref={sectionRef} className="py-24 relative overflow-hidden bg-card/30">
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-[0.02]" style={{
         backgroundImage: `linear-gradient(45deg, hsl(var(--primary)) 25%, transparent 25%),
@@ -240,27 +341,14 @@ export function Portfolio() {
                 </div>
               </div>
 
-              {/* Portfolio Image - Below the card content */}
-              {project.image && project.website && (
-                <a 
-                  href={project.website} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block border-t border-border/50 overflow-hidden"
-                >
-                  <div className="relative group/image">
-                    <img 
-                      src={project.image} 
-                      alt={`${project.name} website screenshot`}
-                      className="w-full h-48 object-cover object-top transition-transform duration-500 group-hover/image:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-primary/0 group-hover/image:bg-primary/10 transition-colors duration-300 flex items-center justify-center">
-                      <span className="opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 bg-background/90 px-4 py-2 rounded-lg text-sm font-medium text-foreground">
-                        {t('portfolio.viewLiveSite')}
-                      </span>
-                    </div>
-                  </div>
-                </a>
+              {/* Portfolio Image Slider */}
+              {project.images && project.images.length > 0 && project.website && (
+                <PortfolioImageSlider
+                  images={project.images}
+                  projectName={project.name}
+                  website={project.website}
+                  isInView={isInView}
+                />
               )}
 
               {/* Hover glow */}
