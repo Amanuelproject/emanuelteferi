@@ -11,6 +11,7 @@ import { Footer } from '@/components/Footer';
 import { SectionCTA } from '@/components/SectionCTA';
 import { SectionDivider } from '@/components/SectionDivider';
 import { Gallery } from '@/components/Gallery';
+import { RainEffect } from '@/components/RainEffect';
 
 const Index = () => {
   const [showPreloader, setShowPreloader] = useState(true);
@@ -32,7 +33,10 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      {/* Subtle rain effect */}
+      <RainEffect />
+      
       {/* Preloader */}
       {showPreloader && !hasSeenPreloader && (
         <Preloader onComplete={handlePreloaderComplete} />
