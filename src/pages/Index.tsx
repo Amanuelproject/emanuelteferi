@@ -40,7 +40,7 @@ const Index = () => {
       <AnimationProvider>
         <div className={showPreloader && !hasSeenPreloader ? 'opacity-0' : 'opacity-100 transition-opacity duration-500'}>
           <Navbar />
-          <main className="relative z-10">
+          <main>
             <Hero />
             <About />
             <Testimonials />

@@ -11,42 +11,27 @@ export function AnimationProvider({ children }: AnimationProviderProps) {
   const [isLowPerformance, setIsLowPerformance] = useState(false);
   const [isReady, setIsReady] = useState(false);
 
-  // Detect low-performance devices
+  // Mark ready immediately - only disable for very low-end devices
   useEffect(() => {
-    const checkPerformance = () => {
-      // Check for low-end indicators
-      const isMobile = window.innerWidth < 768;
-      const hasLowMemory = 'deviceMemory' in navigator && (navigator as any).deviceMemory < 4;
-      const hasSlowConnection = 'connection' in navigator && 
-        (navigator as any).connection?.effectiveType === '2g';
-      
-      setIsLowPerformance(isMobile && (hasLowMemory || hasSlowConnection));
-    };
-
-    checkPerformance();
-    window.addEventListener('resize', checkPerformance);
+    // Only disable on extremely low-end devices
+    const hasLowMemory = 'deviceMemory' in navigator && (navigator as any).deviceMemory < 2;
+    const hasSlowConnection = 'connection' in navigator && 
+      (navigator as any).connection?.effectiveType === '2g';
     
-    // Mark as ready after initial check
-    const timer = setTimeout(() => setIsReady(true), 100);
-    
-    return () => {
-      window.removeEventListener('resize', checkPerformance);
-      clearTimeout(timer);
-    };
+    setIsLowPerformance(hasLowMemory && hasSlowConnection);
+    setIsReady(true);
   }, []);
 
   // Skip animations entirely for reduced motion or very low performance
   const shouldShowCobra = isReady && !prefersReducedMotion && !isLowPerformance;
 
   return (
-    <div className="relative">
-      {/* Cobra guide - background layer */}
+    <>
+      {/* Cobra guide - fixed layer that floats above content */}
       {shouldShowCobra && <CobraGuide />}
       
       {/* Main content */}
-      <div className="relative z-10">
-        {children}
-      </div>
-    </div>
+      {children}
+    </>
   );
 }
