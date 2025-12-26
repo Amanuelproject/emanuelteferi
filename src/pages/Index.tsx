@@ -8,7 +8,6 @@ import { Services } from '@/components/Services';
 import { Portfolio } from '@/components/Portfolio';
 import { Contact } from '@/components/Contact';
 import { Footer } from '@/components/Footer';
-import { AnimationProvider } from '@/animations/AnimationProvider';
 
 const Index = () => {
   const [showPreloader, setShowPreloader] = useState(true);
@@ -36,21 +35,19 @@ const Index = () => {
         <Preloader onComplete={handlePreloaderComplete} />
       )}
 
-      {/* Main content with animation layer */}
-      <AnimationProvider>
-        <div className={showPreloader && !hasSeenPreloader ? 'opacity-0' : 'opacity-100 transition-opacity duration-500'}>
-          <Navbar />
-          <main>
-            <Hero />
-            <About />
-            <Testimonials />
-            <Services />
-            <Portfolio />
-            <Contact />
-          </main>
-          <Footer />
-        </div>
-      </AnimationProvider>
+      {/* Main content */}
+      <div className={showPreloader && !hasSeenPreloader ? 'opacity-0' : 'opacity-100 transition-opacity duration-500'}>
+        <Navbar />
+        <main>
+          <Hero />
+          <About />
+          <Testimonials />
+          <Services />
+          <Portfolio />
+          <Contact />
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 };
