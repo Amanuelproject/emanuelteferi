@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowDown, Code2, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { HeroGlow } from '@/animations/HeroGlow';
+import { CTAGlow } from '@/animations/CTAGlow';
 
 const typingTexts = [
   'Web Developer',
@@ -151,7 +151,7 @@ export function Hero() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 relative"
           >
             {/* Glow effect behind CTA */}
-            <HeroGlow />
+            <CTAGlow />
             
             <Button variant="hero" size="xl" onClick={() => handleScroll('#portfolio')}>
               View My Work

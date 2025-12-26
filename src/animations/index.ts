@@ -1,8 +1,6 @@
-// Animation System Exports
-export { GuideSerpent } from './GuideSerpent';
-export { ScrollProgress } from './ScrollProgress';
-export { SectionReveal } from './SectionReveal';
-export { HeroGlow } from './HeroGlow';
+// Cinematic Animation System Exports
+export { CobraGuide } from './CobraGuide';
+export { CTAGlow } from './CTAGlow';
 export { AnimationProvider } from './AnimationProvider';
-export { useScrollAnimation } from './hooks/useScrollAnimation';
 export { useReducedMotion } from './hooks/useReducedMotion';
+export { useScrollProgress } from './hooks/useScrollProgress';
