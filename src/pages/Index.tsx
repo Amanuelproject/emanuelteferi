@@ -38,7 +38,7 @@ const Index = () => {
       const hideTimer = setTimeout(() => {
         setShowLanguageHint(false);
         sessionStorage.setItem('languageHintSeen', 'true');
-      }, 8500);
+      }, 3000); // Show for 3 seconds
       return () => {
         clearTimeout(showTimer);
         clearTimeout(hideTimer);
